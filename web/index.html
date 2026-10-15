@@ -364,6 +364,7 @@ body,body.teensy-active{padding:12px clamp(12px,2vw,32px) 32px}
 
 </section>
 <script src="./web-adapter.js?v=23.35"></script>
+<script src="./encoder-fluid.js"></script>
 <script>
 /* The browser presents pixels produced by embedded/LiquidDisplay.cpp. */
 (function(root){
@@ -572,40 +573,24 @@ const macroGrid=document.querySelector('#macroGrid');
 function arcPoint(t){const a=(135+270*t)*Math.PI/180;return [75+52*Math.cos(a),75+52*Math.sin(a)];}
 const macroPhysics=new Map();
 function drawMacro(el,val){
- const state=macroPhysics.get(el.id);if(state)state.target=val;
+ const state=macroPhysics.get(el.id);if(state){state.target=val;state.dirty=true;}
  el.querySelector('output').textContent=el.id==='macro-pitch'?`${Math.round((val-50)*24/100)>0?'+':''}${Math.round((val-50)*24/100)} st`:el.id==='macro-fxtype'?['OFF','HALL','PLATE','ROOM','DELAY','PINGPONG','SHIMMER','CHORUS','COMB'][Math.min(8,Math.round(val*8/100))]:el.id==='macro-fxsync'?['1/4','1/8','1/16','1/8 D','1/8 T'][Math.min(4,Math.round(val*4/100))]:Math.round(val)+'%';el.setAttribute('aria-valuenow',Math.round(val));
 }
+const reducedEncoderMotion=matchMedia('(prefers-reduced-motion: reduce)');
+reducedEncoderMotion.addEventListener('change',()=>{for(const p of macroPhysics.values())p.dirty=true;});
 function animateMacroPhysics(now){
  for(const [id,p] of macroPhysics){
-  const el=document.getElementById(id);if(!el)continue;
-  const dt=Math.min(.05,Math.max(.002,(now-(p.last||now))/1000));p.last=now;
-  // Critically damped response: the dark arc follows the encoder with soft inertia.
-  const omega=15,acc=omega*omega*(p.target-p.x)-2*omega*p.v;
-  p.v+=acc*dt;p.x+=p.v*dt;
-  const t=Math.max(0,Math.min(1,p.x/100)),end=arcPoint(t);
-  const radius=52,travel=270*Math.PI/180*radius;
-  el.querySelector('.arc-fill').setAttribute('stroke-dasharray',`${(travel*t).toFixed(2)} 1000`);
-  const dot=el.querySelector('.arc-dot');dot.setAttribute('cx',end[0]);dot.setAttribute('cy',end[1]);
-  // A velocity-driven continuous thick fluid ribbon, not a stroked tail.
-  // Radial thickness surges near the leading tip and relaxes as velocity dissipates.
-  const signed=Math.max(-1,Math.min(1,p.v/115)),energy=Math.abs(signed);
-  p.slush=(p.slush||0)*Math.exp(-dt*6)+signed*(1-Math.exp(-dt*6));
-  const length=.12+.17*energy,steps=15,outer=[],inner=[];
-  for(let i=0;i<=steps;i++){
-   const u=i/steps,tt=Math.max(0,t-length*(1-u)),a=(135+270*tt)*Math.PI/180;
-   const swell=Math.pow(u,2.8)*energy;
-   const width=5+7*swell+1.8*Math.sin(Math.PI*u)*Math.abs(p.slush);
-   const rr=52+Math.sin(Math.PI*u)*p.slush*3.5;
-   outer.push([(75+(rr+width)*Math.cos(a)).toFixed(2),(75+(rr+width)*Math.sin(a)).toFixed(2)]);
-   inner.push([(75+(rr-width)*Math.cos(a)).toFixed(2),(75+(rr-width)*Math.sin(a)).toFixed(2)]);
-  }
-  const d='M'+outer.map(q=>q.join(',')).join(' L')+' L'+inner.reverse().map(q=>q.join(',')).join(' L')+' Z';
-  el.querySelector('.liquid-mass').setAttribute('d',d);
-  dot.setAttribute('r',(5+5*energy).toFixed(2));
-  const bead=el.querySelector('.liquid-bead');const a=(135+270*Math.min(1,t+.02+.04*energy))*Math.PI/180;
-  bead.setAttribute('cx',(75+(52+8*energy)*Math.cos(a)).toFixed(2));
-  bead.setAttribute('cy',(75+(52+8*energy)*Math.sin(a)).toFixed(2));
-  bead.setAttribute('r',(energy>0.12?1.1+2.8*energy:0).toFixed(2));
+  const dt=p.last?Math.min(.1,(now-p.last)/1000):0;p.last=now;
+  if(document.hidden || document.querySelector('#teensyPage').hidden || (p.resting&&!p.dirty))continue;
+  LiquidEncoderFluid.step(p,dt,reducedEncoderMotion.matches);
+  p.resting=Math.abs(p.x-p.target)<.001&&Math.abs(p.v)<.01&&p.energy<.001&&p.surface.every((v,i)=>Math.abs(v)<.001&&Math.abs(p.velocity[i])<.001);
+  if(p.resting){p.x=p.target;p.energy=0;p.lean=0;p.surface.fill(0);p.velocity.fill(0);}
+  p.dirty=false;
+  const shape=LiquidEncoderFluid.geometry(p);
+  p.mass.setAttribute('d',shape.path);
+  p.dot.setAttribute('cx',shape.head[0].toFixed(2));
+  p.dot.setAttribute('cy',shape.head[1].toFixed(2));
+  p.dot.setAttribute('r',shape.radius.toFixed(2));
  }
  requestAnimationFrame(animateMacroPhysics);
 }
@@ -668,10 +653,10 @@ function setMacro(def,val,apply=true){val=Math.max(0,Math.min(100,val));if(def.i
  sendImmediate();}}
 for(const def of macroDefs){const el=document.createElement('div');el.className='macro-knob';el.id='macro-'+def.id;el.setAttribute('role','slider');el.setAttribute('tabindex','0');el.setAttribute('aria-label',def.name);el.setAttribute('aria-valuemin','0');el.setAttribute('aria-valuemax','100');el.setAttribute('aria-valuenow','50');el.title=def.help;
  const pts=Array.from({length:65},(_,i)=>arcPoint(i/64));const path='M'+pts.map(p=>p.map(n=>n.toFixed(2)).join(',')).join(' L');
- el.innerHTML=`<svg viewBox="0 0 150 140" aria-hidden="true"><path class="arc-bg" d="${path}"/><path class="arc-fill" d="${path}"/><path class="liquid-mass" fill="#111"/><circle class="arc-dot" r="5"/><circle class="liquid-bead" r="3"/></svg><strong>${def.name}</strong><output>50%</output><span class="macro-tip" role="tooltip">${def.help}</span>`;macroGrid.append(el);macroPhysics.set(el.id,{target:50,x:50,v:0,last:0});drawMacro(el,50);
+ el.innerHTML=`<svg viewBox="0 0 150 140" aria-hidden="true"><path class="arc-bg" d="${path}"/><path class="arc-fill" d="${path}"/><path class="liquid-mass" fill="#111"/><circle class="arc-dot" r="5"/><circle class="liquid-bead" r="3"/></svg><strong>${def.name}</strong><output>50%</output><span class="macro-tip" role="tooltip">${def.help}</span>`;macroGrid.append(el);macroPhysics.set(el.id,{...LiquidEncoderFluid.create(50),mass:el.querySelector('.liquid-mass'),dot:el.querySelector('.arc-dot'),last:0});drawMacro(el,50);
  el.addEventListener('keydown',e=>{const step=e.shiftKey?10:2;if(['ArrowUp','ArrowRight','ArrowDown','ArrowLeft','Home','End'].includes(e.key)){e.preventDefault();setMacro(def,e.key==='Home'?0:e.key==='End'?100:macroState[def.id]+(['ArrowUp','ArrowRight'].includes(e.key)?step:-step));}});
  el.addEventListener('wheel',e=>{e.preventDefault();setMacro(def,macroState[def.id]+(e.deltaY<0?2:-2));},{passive:false});
- let drag=null;el.addEventListener('pointerdown',e=>{drag={y:e.clientY,value:macroState[def.id]};el.setPointerCapture(e.pointerId);document.querySelector('#macroDescription').textContent=def.id==='space'?spaceHelp():def.help;});el.addEventListener('pointermove',e=>{if(drag)setMacro(def,drag.value+(drag.y-e.clientY)*.7)});el.addEventListener('pointerup',()=>drag=null);el.addEventListener('pointercancel',()=>drag=null);el.addEventListener('click',()=>{el.classList.toggle('tip-open');});el.addEventListener('blur',()=>el.classList.remove('tip-open'));
+ let drag=null;el.addEventListener('pointerdown',e=>{drag={y:e.clientY,value:macroState[def.id]};el.setPointerCapture(e.pointerId);document.querySelector('#macroDescription').textContent=def.id==='space'?spaceHelp():def.help;});el.addEventListener('pointermove',e=>{if(drag)setMacro(def,drag.value+(drag.y-e.clientY)*.7)});el.addEventListener('pointerup',()=>drag=null);el.addEventListener('pointercancel',()=>drag=null);el.addEventListener('lostpointercapture',()=>drag=null);el.addEventListener('click',()=>{el.classList.toggle('tip-open');});el.addEventListener('blur',()=>el.classList.remove('tip-open'));
 }
 refreshSpaceHelp();
 // Save discrete edits from the Full Editor and replay them through existing UI event handlers.

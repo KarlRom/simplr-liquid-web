@@ -36,3 +36,8 @@
   #teensyPage .action-pad{font-size:9px}
   #teensyPage .pad-caption{font-size:9px;letter-spacing:.06em}
 }
+
+/* The liquid silhouette supplies the fill; retain a fine circular guide. */
+#teensyPage .macro-knob .arc-fill,#teensyPage .macro-knob .liquid-bead{display:none}
+#teensyPage .macro-knob .arc-bg{stroke-width:1.8;opacity:.65}
+#teensyPage .macro-knob{-webkit-user-select:none;user-select:none}
