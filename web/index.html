@@ -365,6 +365,7 @@ body,body.teensy-active{padding:12px clamp(12px,2vw,32px) 32px}
 </section>
 <script src="./web-adapter.js?v=23.35"></script>
 <script src="./encoder-fluid.js"></script>
+<script src="./starter-sequence.js"></script>
 <script>
 /* The browser presents pixels produced by embedded/LiquidDisplay.cpp. */
 (function(root){
@@ -688,7 +689,7 @@ function stopNoteReplay(){
  if(!noteReplaying)return;
  noteReplaying=false;replayEpoch++;
  for(const handle of replayTimers)clearTimeout(handle);replayTimers=[];
- for(const key of padKeys){if(replayHeld.has(key)){sliceEvent(key,'off');setVisualKey(key,pressedKeys.has(key));}}
+ for(const [key] of sliceNotes){if(replayHeld.has(key)){sliceEvent(key,'off');setVisualKey(key,pressedKeys.has(key));}}
  replayHeld.clear();replayOverrides.clear();recordingStatus();
 }
 const replayHeld=new Set();
@@ -1239,9 +1240,12 @@ requestAnimationFrame(animate);
 document.querySelector('#loadAudioControl').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();document.querySelector('#file').click();}});
 setTeensyMode(true);
 // Apply the opening preset once; keep later edits when switching views.
-for(const [id,value] of [['bloom',82],['texture',100],['motion',77],['color',100],['pitch',50],['fxsync',50],['fxtype',50],['space',59]]){
+for(const [id,value] of [['bloom',32],['texture',76],['motion',100],['color',35],['pitch',50],['fxsync',50],['fxtype',50],['space',79]]){
  setMacro(macroDefs.find(def=>def.id===id),value);
 }
+const starterSequence=LiquidStarterSequence.build();
+recordedNotes=starterSequence.notes;noteRecordDuration=starterSequence.duration;
+document.querySelector('.action-pad[data-action="SEQ"]').title='Play the starter G / H / K sequence, or your own recorded performance';
 </script>
 <dialog id="quickGuide" aria-labelledby="guideTitle" aria-describedby="guideSummary">
 <form method="dialog"><button class="guide-close" aria-label="Close quick guide">×</button></form>
@@ -1253,7 +1257,7 @@ for(const [id,value] of [['bloom',82],['texture',100],['motion',77],['color',100
 <li>Play. Press PLAY for continuous sound, or hold the note pads to perform. Use LOAD AUDIO for your own WAV or MP3; a new file stays stopped until you play it.</li>
 <li>Shape it. Drag an encoder up or down. FLOW changes grain activity, MELT changes grain length, DRIFT adds motion, and RIPPLE changes articulation. Set pitch with PITCH; choose an effect with FX TYPE, then adjust SPACE and FX SYNC.</li>
 <li>Explore. Drag across the waveform to select a playback region. Try FREEZE to hold the grain position. Open FULL EDITOR for detailed audio, liquid and effect controls. Turn your phone sideways for pads on the right.</li>
-<li>Capture and save. Use LIVE CAPTURE to record an input, then stop to use it as a sample. RECORD OUTPUT records the processed sound; stop it, then export the WAV. The pad marked K / REC records a note performance; SEQ replays it.</li>
+<li>Capture and save. Use LIVE CAPTURE to record an input, then stop to use it as a sample. RECORD OUTPUT records the processed sound; stop it, then export the WAV. Press SEQ to try the starter G / H / K loop. K is the high C sample key in this loop; the K / REC pad records your own performance and replaces the starter loop. SEQ replays it.</li>
 </ol>
 <p class="guide-note">Use headphones before enabling input monitoring. Audio stays in your browser. Reopen this guide anytime from MORE → QUICK GUIDE.</p>
 <p class="guide-signature">I hope you find something you didn’t expect.<br>-Karl Rom</p>

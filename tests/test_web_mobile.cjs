@@ -9,9 +9,11 @@ const fs=require('fs'),path=require('path'),assert=require('assert');
  await page.waitForSelector('#teensyPads button');
  assert.equal(await page.evaluate(()=>vals.liquidScale),1.3);
  assert.equal(await page.evaluate(()=>vals.direction),2);
+ assert(await page.evaluate(()=>recordedNotes.length>0 && recordedNotes.every(n=>['g','h','k'].includes(n.letter))));
+ assert.equal(await page.evaluate(()=>noteReplaying),false);
  assert.equal(await page.locator('#direction').inputValue(),'2');
  assert.equal(await page.locator('.action-pad[data-action="DIRECTION"]').textContent(),'DIR: OUTWARD');
- for(const [id,value] of [['bloom','82%'],['texture','100%'],['motion','77%'],['color','100%'],['space','59%'],['pitch','0 st'],['fxsync','1/16'],['fxtype','DELAY']])assert.equal(await page.locator('#macro-'+id+' output').textContent(),value);
+ for(const [id,value] of [['bloom','32%'],['texture','76%'],['motion','100%'],['color','35%'],['space','79%'],['pitch','0 st'],['fxsync','1/16'],['fxtype','DELAY']])assert.equal(await page.locator('#macro-'+id+' output').textContent(),value);
  if(await page.locator('#quickGuide').isVisible()){
   assert(await page.locator('#guideTitle').evaluate(e=>e===document.activeElement));
   assert(await page.locator('#quickGuide').evaluate(e=>e.clientHeight>=e.scrollHeight || getComputedStyle(e).overflowY==='auto'));
@@ -43,6 +45,14 @@ const fs=require('fs'),path=require('path'),assert=require('assert');
  await page.locator('#webAudioEnable').click();
  await page.waitForFunction(()=>document.querySelector('#webAudioEnable').textContent.includes('ACTIVE'));
  assert.equal(await page.evaluate(()=>SIMPLR_WEB.state.name),'JUNIOR_MESA.MP3');
+ await page.locator('.action-pad[data-action="SEQ"]').click();await page.waitForTimeout(550);
+ assert(await page.evaluate(()=>audioMessages.some(m=>m.type==='note'&&m.index===12&&m.on)));
+ assert.equal(await page.evaluate(()=>noteRecording),false);
+ await page.locator('.action-pad[data-action="SEQ"]').click();
+ assert.equal(await page.evaluate(()=>noteReplaying),false);
+ assert.equal(await page.evaluate(()=>replayHeld.size),0);
+ assert(await page.evaluate(()=>audioMessages.some(m=>m.type==='note'&&m.index===12&&!m.on)));
+
  assert.equal(await page.evaluate(()=>playing),false);
  assert(await page.evaluate(()=>audioMessages.filter(m=>m.type==='params'&&'play' in m.values).every(m=>Number(m.values.play)===0)));
  await page.evaluate(()=>upload(new File([new Uint8Array(44)],'first.wav')));
