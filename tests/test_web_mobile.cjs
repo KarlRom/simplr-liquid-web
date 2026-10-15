@@ -17,7 +17,7 @@ const fs=require('fs'),path=require('path'),assert=require('assert');
  if(await page.locator('#quickGuide').isVisible()){
   assert(await page.locator('#guideTitle').evaluate(e=>e===document.activeElement));
   assert(await page.locator('#quickGuide').evaluate(e=>e.clientHeight>=e.scrollHeight || getComputedStyle(e).overflowY==='auto'));
-  await page.locator('#closeGuide').click();
+  await page.locator('.guide-close').click();
  }
  await page.locator('#moreActions summary').click();await page.locator('#openGuide').click();
  assert(await page.locator('#quickGuide').isVisible());await page.keyboard.press('Escape');
@@ -42,7 +42,9 @@ const fs=require('fs'),path=require('path'),assert=require('assert');
  });
  await page.goto('http://simplr.test/');
  assert(!await page.locator('#quickGuide').isVisible());
- await page.locator('#webAudioEnable').click();
+ await page.locator('#moreActions summary').click();await page.locator('#openGuide').click();
+ await page.locator('#closeGuide').click();
+ assert(!await page.locator('#quickGuide').isVisible());
  await page.waitForFunction(()=>document.querySelector('#webAudioEnable').textContent.includes('ACTIVE'));
  assert.equal(await page.evaluate(()=>SIMPLR_WEB.state.name),'JUNIOR_MESA.MP3');
  assert.equal(await page.evaluate(()=>noteReplaying),true);
