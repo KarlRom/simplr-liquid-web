@@ -1,0 +1,38 @@
+/* Mobile performance layout; retain the desktop transport and editor. */
+#teensyPads, #teensyPads *, #slicePiano, #slicePiano * {
+  -webkit-user-select:none;
+  user-select:none;
+  -webkit-touch-callout:none;
+}
+@media (max-width:1024px), (hover:none) and (pointer:coarse) {
+  html{scroll-padding-top:0}
+  #appToolbar{position:relative;top:auto;backdrop-filter:none}
+  .control-sidebar{position:static}
+  .primary-bar{flex-wrap:wrap}
+  .live-settings label:first-child{min-width:0}
+  .live-settings select{min-width:0;max-width:100%}
+}
+/* Override the portrait stack on phones and tablets turned sideways. */
+@media (orientation:landscape) and (max-width:1024px),
+       (orientation:landscape) and (hover:none) and (pointer:coarse) {
+  #teensyPage .hardware-layout{
+    grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
+    gap:16px;align-items:start;
+  }
+  #teensyPage .hardware-left{
+    display:flex;flex-direction:column;gap:8px;
+  }
+  #teensyStage .art{height:clamp(140px,36svh,225px)}
+  #teensyPage .knob-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    grid-template-rows:repeat(2,auto);gap:6px 4px;
+  }
+  #teensyPage .macro-knob{padding:4px 0;gap:2px}
+  #teensyPage .macro-knob svg{max-width:72px;max-height:64px}
+  #teensyPage .macro-knob strong{font-size:10px}
+  #teensyPage .macro-knob output{font-size:14px}
+  #teensyPage #teensyPads{padding:8px;gap:6px}
+  #teensyPage .hw-pad{min-height:44px;font-size:14px}
+  #teensyPage .action-pad{font-size:9px}
+  #teensyPage .pad-caption{font-size:9px;letter-spacing:.06em}
+}

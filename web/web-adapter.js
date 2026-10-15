@@ -94,7 +94,7 @@ async function init(){
   await uploadWindow(0);
   await activate;
   window.sendImmediate?.();
-  node.port.postMessage({type:'params',values:{density:64,size:175,spray:.47,gain:.45,play:1}});
+  node.port.postMessage({type:'params',values:{density:64,size:175,spray:.47,gain:.45,play:0}});
   msg('AUDIO ON · ORIGINAL C++ ENGINE (WASM) · LOCAL PLAYBACK');
   return true;
  })().catch(e=>{starting=null;msg('AUDIO START FAILED · '+e.message);throw e;});
@@ -103,6 +103,7 @@ async function init(){
 async function loadFile(buffer){
  if(state.recording)throw new Error('Stop live capture before importing audio');
  if(!ready())await init();
+ node.port.postMessage({type:'params',values:{play:0}});
  const decoded=await ctx.decodeAudioData(buffer.slice(0)); // native browser WAV/MP3 decoding.
  const frames=decoded.length;
  // Decoding happens once; only up to 20 seconds is copied to the worker on each seek.
