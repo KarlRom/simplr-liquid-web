@@ -2,12 +2,12 @@
    AudioWorklet handles C++ Wasm rendering; only decoded audio, commands and telemetry cross ports. */
 (()=>{'use strict';
 const nativeFetch=window.fetch.bind(window);
-const initial={duration:0,sourceDuration:0,cacheStart:0,cacheSeconds:0,inputLevel:0,name:'BROWSER DEMO',
+const initial={duration:0,sourceDuration:0,cacheStart:0,cacheSeconds:0,inputLevel:0,name:'JUNIOR_MESA.MP3',
  peaks:[],grains:[],active:0,started:0,dropped:0,stolen:0,preLimiterOvers:0,preLimiterPeak:0,
  outputRecording:false,outputReady:false,canExport:false,recording:false,callbackAvgUs:0,callbackMaxUs:0,callbackMisses:0};
 let state={...initial}, ctx=null,node=null,starting=null,source=null,sequence=Array(16).fill(0),
  displayWorker=null,displaySequence=0,displayPromises=new Map(),
-  importedName='BROWSER DEMO',captureParts=[],readySample=null,sampleRequest=0,stoppedCapture=null,
+  importedName='JUNIOR_MESA.MP3',captureParts=[],readySample=null,sampleRequest=0,stoppedCapture=null,
   microphone=null,micNode=null,liveParts=[],stoppedLive=null,finalizingLive=null,deviceId='',
   livePeakBins=new Float32Array(1000),liveChunksFrames=0;
 const LIMIT_SECONDS=20;
@@ -18,14 +18,24 @@ function waveform(left,right,frames){const peaks=[];const size=1000;for(let p=0;
  const start=Math.floor(p*frames/size),end=Math.min(frames,Math.ceil((p+1)*frames/size));let a=0;
  for(let j=start;j<end;j++){a=Math.max(a,Math.abs(left[j]),Math.abs(right[j]));}peaks.push(a);
  }return peaks;}
-function makeDemo(rate){const length=Math.floor(rate*4),l=new Float32Array(length),r=new Float32Array(length);
- for(let i=0;i<length;i++){
-  const t=i/rate;const fade=Math.min(1,t*8, (4-t)*2);const low=Math.sin(t*2*Math.PI*110)*.14;
-  const pad=Math.sin(t*2*Math.PI*(196+3*Math.sin(t*0.4)))*.12;
-  const pulse=(Math.sin(t*2*Math.PI*1.2)>0?1:-1)*Math.sin(t*2*Math.PI*330)*.055;
-  const a=(low+pad+pulse+Math.sin(t*2*Math.PI*440)*.05)*fade;
-  l[i]=a;r[i]=a*.88+Math.sin(t*2*Math.PI*224)*.028*fade;
- }return {length,duration:4,left:l,right:r};}
+// Fetch the bundled sample immediately; decoding a preview does not enable audio.
+const defaultSampleBytes=nativeFetch('./assets/junior_mesa.mp3').then(r=>{
+ if(!r.ok)throw new Error('Could not load junior_mesa.mp3');return r.arrayBuffer();
+});
+defaultSampleBytes.catch(()=>{});
+(async()=>{
+ try{
+  const bytes=await defaultSampleBytes;
+  const decoder=new OfflineAudioContext(2,1,48000);
+  const decoded=await decoder.decodeAudioData(bytes.slice(0));
+  if(ready()||importedName!=='JUNIOR_MESA.MP3')return;
+  const frames=Math.min(decoded.length,decoded.sampleRate*LIMIT_SECONDS);
+  state.duration=frames/decoded.sampleRate;state.sourceDuration=decoded.duration;
+  state.cacheSeconds=state.duration;
+  state.peaks=waveform(decoded.getChannelData(0),decoded.getChannelData(Math.min(1,decoded.numberOfChannels-1)),frames);
+  msg('JUNIOR_MESA.MP3 READY · ENABLE AUDIO, THEN PLAY');
+ }catch(_){msg('DEFAULT SAMPLE UNAVAILABLE · LOAD YOUR OWN WAV OR MP3');}
+})();
 function uploadWindow(seconds){
  if(!source||!ready())return Promise.reject(new Error('Audio not initialized'));
  const rate=ctx.sampleRate;
@@ -90,11 +100,13 @@ async function init(){
     const to=setTimeout(()=>{window.removeEventListener('simplr:ready',on);reject(Error('DSP initialization timed out'));},8000);
     const on=()=>{clearTimeout(to);resolve();};window.addEventListener('simplr:ready',on,{once:true});
   });
-  source=makeDemo(ctx.sampleRate);importedName='BROWSER DEMO';
+  await window.sendImmediate?.(); // Keep the transport stopped before installing any sample.
+  const decoded=await ctx.decodeAudioData((await defaultSampleBytes).slice(0));
+  source={length:decoded.length,duration:decoded.duration,left:decoded.getChannelData(0),right:decoded.getChannelData(Math.min(1,decoded.numberOfChannels-1))};
+  importedName='JUNIOR_MESA.MP3';
   await uploadWindow(0);
   await activate;
   window.sendImmediate?.();
-  node.port.postMessage({type:'params',values:{density:64,size:175,spray:.47,gain:.45,play:0}});
   msg('AUDIO ON · ORIGINAL C++ ENGINE (WASM) · LOCAL PLAYBACK');
   return true;
  })().catch(e=>{starting=null;msg('AUDIO START FAILED · '+e.message);throw e;});

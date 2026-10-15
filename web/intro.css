@@ -1,0 +1,15 @@
+#quickGuide{width:min(620px,calc(100% - 24px));max-height:calc(100svh - 24px);overflow:auto;border:2px solid #111;border-radius:10px;padding:24px;background:#f8f8f6;color:#111;font:14px/1.55 Arial,Helvetica,sans-serif;box-shadow:0 16px 80px #0004}
+#quickGuide::backdrop{background:#0007}
+#quickGuide h2{font-size:30px;letter-spacing:-.055em;margin:0 0 8px;line-height:1.1}
+#quickGuide .guide-kicker{font-size:10px;letter-spacing:.12em;font-weight:800;margin:0 0 10px;color:#555}
+#quickGuide ol{padding-left:22px;margin:18px 0}
+#quickGuide li{padding-left:3px;margin:10px 0}
+#quickGuide .guide-note{padding:12px;border:1px solid #bbb;font-size:12px}
+#quickGuide .guide-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:18px}
+#quickGuide label{font-size:12px;display:flex;align-items:center;gap:7px}
+#quickGuide input{width:18px;height:18px}
+#quickGuide button{min-height:44px;border-radius:4px}
+@media(max-height:450px){#quickGuide{padding:16px}#quickGuide h2{font-size:24px}#quickGuide li{margin:7px 0}}
+
+#quickGuide .guide-close{position:absolute;right:8px;top:6px;width:44px;padding:0;border:0;background:transparent;color:#111;font-size:27px;cursor:pointer}
+#quickGuide h2{padding-right:28px;outline:none}
