@@ -1,4 +1,9 @@
-#quickGuide{width:min(620px,calc(100% - 24px));max-height:calc(100svh - 24px);overflow:auto;border:0;border-radius:18px;padding:30px;background:linear-gradient(135deg,rgba(255,255,253,.34),rgba(239,245,236,.22));backdrop-filter:blur(22px) saturate(80%);-webkit-backdrop-filter:blur(22px) saturate(80%);color:#30332f;font:14px/1.65 Arial,Helvetica,sans-serif;box-shadow:inset 0 1px 1px #ffffffa6,inset 0 -1px 1px #ffffff33,inset 0 0 24px #ffffff1a,0 18px 70px #17201820}
+#quickGuide{width:min(620px,calc(100% - 24px));max-height:calc(100svh - 24px);overflow:auto;border:0;border-radius:18px;padding:30px;background:
+ radial-gradient(ellipse at 0% 0%,#ffffff80,transparent 44%),
+ radial-gradient(ellipse at 100% 100%,#ffffff40,transparent 42%),
+ linear-gradient(115deg,transparent 4%,#ffffff40 5%,#ffffff0a 9%,transparent 16% 51%,#ffffff26 54%,#ffffff05 61%,transparent 69%),
+ linear-gradient(165deg,#ffffff5c 0%,#ffffff14 14%,transparent 38% 75%,#ffffff30 100%),
+ linear-gradient(135deg,rgba(255,255,253,.28),rgba(239,245,236,.16));backdrop-filter:blur(18px) saturate(90%);-webkit-backdrop-filter:blur(18px) saturate(90%);color:#30332f;font:14px/1.65 Arial,Helvetica,sans-serif;box-shadow:inset 0 0 0 1px #ffffffb8,inset 0 0 0 4px #ffffff1f,inset 2px 3px 3px #ffffff80,inset -2px -3px 4px #83928026,0 2px 1px #ffffff66,0 20px 65px #17201826}
 #quickGuide::backdrop{background:rgba(30,35,31,.12)}
 #quickGuide h2{font-size:36px;font-weight:400;letter-spacing:-.045em;margin:0 0 14px;line-height:1.15;padding-right:28px;outline:none}
 #quickGuide .guide-kicker{font-size:10px;letter-spacing:.12em;font-weight:400;margin:0 0 14px;color:#686e65}
@@ -10,8 +15,8 @@
 #quickGuide label{font-size:12px;display:flex;align-items:center;gap:7px;color:#646b60}
 #quickGuide input{width:18px;height:18px;accent-color:#77856e}
 #quickGuide button{min-height:44px;border:0;border-radius:8px;font-weight:400}
-#quickGuide #closeGuide{background:#e0e5db;color:#35432f;padding:12px 20px;font-size:13px}
-#quickGuide #closeGuide:hover{background:#d4ddce}
+#quickGuide #closeGuide{background:linear-gradient(135deg,#ffffff8c,#e8eee33b 45%,#ffffff4d);box-shadow:inset 0 1px 1px #fffd,inset 0 0 0 1px #ffffff80,0 2px 5px #26352514;color:#35432f;padding:12px 20px;font-size:13px}
+#quickGuide #closeGuide:hover{background:linear-gradient(135deg,#ffffffb3,#e8eee366 45%,#ffffff80)}
 #quickGuide button:focus-visible{outline:2px solid #89967f;outline-offset:3px}
 #quickGuide .guide-close{position:absolute;right:12px;top:10px;width:44px;padding:0;background:transparent;color:#65705f;font-size:25px;cursor:pointer}
 @media(max-width:480px){#quickGuide{padding:24px}#quickGuide h2{font-size:32px}}
