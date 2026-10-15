@@ -8,6 +8,9 @@ const fs=require('fs'),path=require('path'),assert=require('assert');
  await page.setViewportSize({width:w,height:h});await page.goto('http://simplr.test/');
  await page.waitForSelector('#teensyPads button');
  assert.equal(await page.evaluate(()=>vals.liquidScale),1.3);
+ assert.equal(await page.evaluate(()=>vals.direction),2);
+ assert.equal(await page.locator('#direction').inputValue(),'2');
+ assert.equal(await page.locator('.action-pad[data-action="DIRECTION"]').textContent(),'DIR: OUTWARD');
  for(const [id,value] of [['bloom','82%'],['texture','100%'],['motion','77%'],['color','100%'],['space','59%'],['pitch','0 st'],['fxsync','1/16'],['fxtype','DELAY']])assert.equal(await page.locator('#macro-'+id+' output').textContent(),value);
  if(await page.locator('#quickGuide').isVisible()){
   assert(await page.locator('#guideTitle').evaluate(e=>e===document.activeElement));
@@ -23,7 +26,7 @@ const fs=require('fs'),path=require('path'),assert=require('assert');
  if(w<=1024){assert.equal(data.toolbar,'relative');await page.evaluate(()=>scrollTo(0,250));assert((await page.locator('#appToolbar').boundingBox()).y<0);await page.evaluate(()=>scrollTo(0,0));}
  if(w>h)assert(data.right.x>=data.left.right-1,JSON.stringify(data));else assert(data.right.y>=data.left.bottom-1);
  await page.locator('#macro-pitch').focus();await page.keyboard.press('End');assert.equal(await page.evaluate(()=>vals.pitch),12);
- await page.locator('.action-pad[data-action="DIRECTION"]').click();assert.equal(await page.evaluate(()=>vals.direction),1);
+ await page.locator('.action-pad[data-action="DIRECTION"]').click();assert.equal(await page.evaluate(()=>vals.direction),3);
  if(process.env.SCREENSHOT_DIR)await page.screenshot({path:path.join(process.env.SCREENSHOT_DIR,`view-${w}.png`),fullPage:true});
  await page.locator('#exitTeensy').click();assert(await page.locator('#fullPage').isVisible());
  assert.equal(await page.locator('#slicePiano button').first().evaluate(e=>getComputedStyle(e).userSelect),'none');

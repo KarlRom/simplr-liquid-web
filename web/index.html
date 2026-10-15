@@ -463,11 +463,11 @@ for(const id of ['shimmerAmount','shimmerTone'])document.querySelector('#'+id).o
 document.querySelector('#shimmerInterval').onchange=e=>{vals.shimmerInterval=+e.target.value;sendImmediate()};
 function toggleShimmer(){shimmerSettings.hidden=vals.fxType!==6;}
 toggleShimmer();
-const directionLabel=document.createElement('label');directionLabel.innerHTML='<strong style="font-size:15px">GRAIN DIRECTION</strong><select id="direction" aria-label="Grain direction" style="width:100%;font-size:16px;padding:12px;border:2px solid #111;background:transparent"><option value="0">FORWARD</option><option value="1">REVERSE</option><option value="2">OUTWARD</option><option value="3">INWARD</option><option value="4">PINGPONG</option><option value="5">RANDOM</option></select>';
+const directionLabel=document.createElement('label');directionLabel.innerHTML='<strong style="font-size:15px">GRAIN DIRECTION</strong><select id="direction" aria-label="Grain direction" style="width:100%;font-size:16px;padding:12px;border:2px solid #111;background:transparent"><option value="0">FORWARD</option><option value="1">REVERSE</option><option value="2" selected>OUTWARD</option><option value="3">INWARD</option><option value="4">PINGPONG</option><option value="5">RANDOM</option></select>';
 document.querySelector('#granulator').prepend(directionLabel);
 const bloomCurveLabel=document.createElement('label');bloomCurveLabel.innerHTML='<strong>BLOOM CURVE</strong><select id="bloomCurve" style="font-size:16px;padding:10px;width:100%"><option value="0">LINEAR</option><option value="1">EXPONENTIAL</option><option value="2" selected>ORGANIC</option></select>';document.querySelector('#granulator').prepend(bloomCurveLabel);vals.bloomCurve=2;bloomCurveLabel.querySelector('select').onchange=e=>{vals.bloomCurve=+e.target.value;send()};
 const shapeLabel=document.createElement('label');shapeLabel.innerHTML='<strong>GRAIN SHAPE</strong><select id="shape" style="font-size:16px;padding:10px;width:100%"><option value="0">SMOOTH</option><option value="1">LINEAR</option><option value="2">EXPONENTIAL</option><option value="3">HANN</option><option value="4">GAUSSIAN</option><option value="5">TUKEY</option></select>';document.querySelector('#granulator').prepend(shapeLabel);vals.shape=0;shapeLabel.querySelector('select').onchange=e=>{vals.shape=+e.target.value;send()};
-vals.direction=0;directionLabel.querySelector('select').onchange=e=>{vals.direction=+e.target.value;send()};
+vals.direction=2;directionLabel.querySelector('select').onchange=e=>{vals.direction=+e.target.value;send()};
 let seqPlaying=false,metroOn=false,bpm=120,clickVolume=.2,delayDivision=2,outputRecording=false;
 const grid=document.querySelector('#seqGrid');
 const label=document.createElement('b');label.textContent='KEY';grid.append(label);
@@ -766,7 +766,7 @@ for(let i=0;i<16;i++){
   for(const event of ['pointerup','pointercancel','lostpointercapture'])b.addEventListener(event,release);
   b.addEventListener('keydown',e=>{if((e.key===' '||e.key==='Enter')&&!e.repeat){e.preventDefault();keyOn(key);b.classList.add('down');}});
   b.addEventListener('keyup',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();keyOff(key);b.classList.remove('down');}});
- }else{const action=padActions[i-12];b.dataset.action=action;b.textContent=action;b.classList.add('action-pad');b.onclick=()=>{if(action==='K / REC')toggleNoteRecording();if(action==='PLAY')document.querySelector('#teensyPlay').click();if(action==='SEQ')toggleNoteReplay();if(action==='DIRECTION'){const select=document.querySelector('#direction');if(select){select.value=String((Number(select.value)+1)%select.options.length);select.dispatchEvent(new Event('change',{bubbles:true}));b.textContent='DIR: '+select.options[select.selectedIndex].textContent;}}};}
+ }else{const action=padActions[i-12];b.dataset.action=action;b.textContent=action==='DIRECTION'?'DIR: OUTWARD':action;b.classList.add('action-pad');b.onclick=()=>{if(action==='K / REC')toggleNoteRecording();if(action==='PLAY')document.querySelector('#teensyPlay').click();if(action==='SEQ')toggleNoteReplay();if(action==='DIRECTION'){const select=document.querySelector('#direction');if(select){select.value=String((Number(select.value)+1)%select.options.length);select.dispatchEvent(new Event('change',{bubbles:true}));b.textContent='DIR: '+select.options[select.selectedIndex].textContent;}}};}
  padHost.append(b);
 }
 const sharedArt=document.querySelector('#particles').closest('.art');
