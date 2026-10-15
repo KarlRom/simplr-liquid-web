@@ -1,5 +1,5 @@
-#quickGuide{width:min(620px,calc(100% - 24px));max-height:calc(100svh - 24px);overflow:auto;border:0;border-radius:18px;padding:30px;background:linear-gradient(135deg,rgba(255,255,253,.78),rgba(245,248,242,.64));backdrop-filter:blur(14px) saturate(125%);-webkit-backdrop-filter:blur(14px) saturate(125%);color:#30332f;font:14px/1.65 Arial,Helvetica,sans-serif;box-shadow:inset 0 1px 0 #ffffffb3,inset 0 0 0 1px #ffffff66,0 18px 70px #17201826}
-#quickGuide::backdrop{background:rgba(30,35,31,.18)}
+#quickGuide{width:min(620px,calc(100% - 24px));max-height:calc(100svh - 24px);overflow:auto;border:0;border-radius:18px;padding:30px;background:linear-gradient(135deg,rgba(255,255,253,.54),rgba(239,245,236,.36));backdrop-filter:blur(22px) saturate(80%);-webkit-backdrop-filter:blur(22px) saturate(80%);color:#30332f;font:14px/1.65 Arial,Helvetica,sans-serif;box-shadow:inset 0 1px 1px #ffffffa6,inset 0 -1px 1px #ffffff33,inset 0 0 24px #ffffff1a,0 18px 70px #17201820}
+#quickGuide::backdrop{background:rgba(30,35,31,.12)}
 #quickGuide h2{font-size:36px;font-weight:400;letter-spacing:-.045em;margin:0 0 14px;line-height:1.15;padding-right:28px;outline:none}
 #quickGuide .guide-kicker{font-size:10px;letter-spacing:.12em;font-weight:400;margin:0 0 14px;color:#686e65}
 #quickGuide ol{padding-left:22px;margin:22px 0}
