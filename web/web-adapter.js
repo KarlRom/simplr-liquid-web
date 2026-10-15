@@ -113,6 +113,7 @@ async function init(){
  return starting;
 }
 async function loadFile(buffer){
+ window.dispatchEvent(new Event('simplr:custom-source'));
  if(state.recording)throw new Error('Stop live capture before importing audio');
  if(!ready())await init();
  node.port.postMessage({type:'params',values:{play:0}});
@@ -162,6 +163,7 @@ function syncLiveControls(){
  }
 }
 async function startLive(){
+ window.dispatchEvent(new Event('simplr:custom-source'));
  if(state.recording)return {ok:true};
  if(!navigator.mediaDevices?.getUserMedia)throw Error('Microphone requires HTTPS or localhost and a compatible browser');
  if(!ready())await init();
@@ -313,7 +315,7 @@ window.addEventListener('DOMContentLoaded',()=>{
   btn.style.cssText='background:#111;color:#fff;border:2px solid #111;white-space:nowrap;';
   btn.addEventListener('click',async()=>{
    for(const b of buttons){b.disabled=true;b.textContent='INITIALIZING DSP…';}
-   try{await init();for(const b of buttons)b.textContent='◉ AUDIO ACTIVE';}
+   try{await init();for(const b of buttons)b.textContent='◉ AUDIO ACTIVE';window.dispatchEvent(new Event('simplr:audio-enabled'));}
    catch(_){for(const b of buttons){b.disabled=false;b.textContent='▶ RETRY AUDIO';}}
   });
  }
