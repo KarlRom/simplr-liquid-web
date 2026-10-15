@@ -1,0 +1,22 @@
+#pragma once
+#include <cstddef>
+#include <utility>
+extern "C" void* malloc(size_t);
+extern "C" void free(void*);
+extern "C" void* memcpy(void*,const void*,size_t);
+namespace std {
+template<class T> class vector{
+ T* ptr_=nullptr; size_t size_=0,cap_=0;
+ void grow(size_t requested){if(requested<=cap_)return;size_t n=requested>cap_*2?requested:cap_*2;if(n<4)n=4;T* p=(T*)malloc(sizeof(T)*n);if(ptr_){memcpy(p,ptr_,sizeof(T)*size_);free(ptr_);}ptr_=p;cap_=n;}
+ public:
+ vector()=default;~vector(){free(ptr_);}vector(const vector& v){grow(v.size_);size_=v.size_;memcpy(ptr_,v.ptr_,sizeof(T)*size_);}
+ vector(vector&& v){ptr_=v.ptr_;size_=v.size_;cap_=v.cap_;v.ptr_=nullptr;v.size_=v.cap_=0;}
+ vector& operator=(const vector& v){if(this!=&v){grow(v.size_);size_=v.size_;memcpy(ptr_,v.ptr_,sizeof(T)*size_);}return *this;}
+ vector& operator=(vector&& v){if(this!=&v){free(ptr_);ptr_=v.ptr_;size_=v.size_;cap_=v.cap_;v.ptr_=nullptr;v.size_=v.cap_=0;}return *this;}
+ T& operator[](size_t i){return ptr_[i];}const T& operator[](size_t i)const{return ptr_[i];}
+ size_t size() const {return size_;}bool empty()const{return size_==0;}
+ void reserve(size_t n){grow(n);}void resize(size_t n){grow(n);if(n>size_)for(size_t i=size_;i<n;++i)ptr_[i]=T{};size_=n;}
+ void assign(size_t n,const T& value){resize(n);for(size_t i=0;i<n;++i)ptr_[i]=value;}
+ void push_back(const T&v){grow(size_+1);ptr_[size_++]=v;}
+ T* begin(){return ptr_;}T* end(){return ptr_+size_;}const T*begin()const{return ptr_;}const T*end()const{return ptr_+size_;}
+};}

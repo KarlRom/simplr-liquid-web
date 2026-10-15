@@ -1,0 +1,7 @@
+.DS_Store
+build/
+cmake-build-*/
+CMakeFiles/
+assets/*.mp3
+*.o
+*.dSYM/

@@ -1,0 +1,9 @@
+#pragma once
+namespace std {
+template<class T> struct remove_reference {using type=T;};
+template<class T> struct remove_reference<T&> {using type=T;};
+template<class T> struct remove_reference<T&&> {using type=T;};
+template<class T> constexpr typename remove_reference<T>::type&& move(T&& value){return static_cast<typename remove_reference<T>::type&&>(value);}
+template<class T> void swap(T& a,T& b){T c=move(a);a=move(b);b=move(c);}
+template<class A,class B> struct pair{A first;B second;};
+}

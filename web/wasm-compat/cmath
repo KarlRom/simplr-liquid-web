@@ -1,0 +1,17 @@
+#pragma once
+extern "C" {
+double sin(double);double cos(double);double pow(double,double);double log(double);double exp(double);double tanh(double);double fmod(double,double);double floor(double);double round(double);double sqrt(double);
+}
+namespace std {
+inline double sin(double x){return ::sin(x);}inline float sin(float x){return (float)::sin(x);}
+inline double cos(double x){return ::cos(x);}inline float cos(float x){return (float)::cos(x);}
+inline double pow(double a,double b){return ::pow(a,b);}inline float pow(float a,float b){return (float)::pow(a,b);}
+inline double log(double x){return ::log(x);}inline float log(float x){return (float)::log(x);}
+inline double exp(double x){return ::exp(x);}inline float exp(float x){return (float)::exp(x);}
+inline double tanh(double x){return ::tanh(x);}inline float tanh(float x){return (float)::tanh(x);}
+inline double fmod(double a,double b){return ::fmod(a,b);}inline float fmod(float a,float b){return (float)::fmod(a,b);}
+inline double floor(double x){return ::floor(x);}inline float floor(float x){return (float)::floor(x);}
+inline double round(double x){return ::round(x);}inline float round(float x){return (float)::round(x);}
+inline double sqrt(double x){return ::sqrt(x);}inline float sqrt(float x){return (float)::sqrt(x);}
+inline float abs(float x){return __builtin_fabsf(x);}inline double abs(double x){return __builtin_fabs(x);}
+}

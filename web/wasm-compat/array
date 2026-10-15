@@ -1,0 +1,10 @@
+#pragma once
+#include <cstddef>
+namespace std { template<class T,size_t N> struct array {
+  T elems[N]{};
+  constexpr size_t size()const{return N;}
+  T* begin(){return elems;}T* end(){return elems+N;}
+  const T* begin()const{return elems;}const T* end()const{return elems+N;}
+  T& operator[](size_t i){return elems[i];}const T& operator[](size_t i)const{return elems[i];}
+  void fill(const T& v){for(size_t i=0;i<N;++i)elems[i]=v;}
+}; }

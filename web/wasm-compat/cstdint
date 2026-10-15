@@ -1,0 +1,4 @@
+#pragma once
+using uintptr_t=__UINTPTR_TYPE__;using uint8_t=__UINT8_TYPE__;using uint16_t=__UINT16_TYPE__;using uint32_t=__UINT32_TYPE__;using uint64_t=__UINT64_TYPE__;
+#define UINT32_MAX 4294967295U
+namespace std {using ::uint8_t; using ::uint16_t; using ::uint32_t; using ::uint64_t;}
