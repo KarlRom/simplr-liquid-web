@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SIMPL_R Liquid — Web Edition v0.23.13</title>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SIMPL_R / LIQUID v0.23.35</title>
 <style>
 *{box-sizing:border-box}body{background:#f8f8f6;color:#0b0b0b;font-family:Arial,Helvetica,sans-serif;margin:0;padding:28px clamp(18px,4vw,64px)}header{display:flex;justify-content:space-between;align-items:baseline;gap:15px}h1{font-size:clamp(38px,5vw,70px);letter-spacing:-.08em;font-weight:900;margin:0}header b{font-size:22px;letter-spacing:-.045em}.sub{font-size:20px;margin-top:12px;font-weight:700;letter-spacing:.035em}.main{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:36px;margin:44px 0 22px;align-items:center}.art{position:relative;min-height:390px;display:grid;place-items:center;isolation:isolate}#particles{width:100%;height:390px;display:block;cursor:crosshair;touch-action:pan-y}#fluid{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}#wave{display:none}aside label{display:block;margin:0 0 28px}aside label strong{display:block;font-size:25px;font-weight:900;letter-spacing:-.04em}aside label output{font-size:42px;font-weight:900;display:block;margin:9px 0}input[type=range]{accent-color:#111;width:100%}.utility{border-top:2px solid #111;padding-top:20px;display:flex;align-items:center;flex-wrap:wrap;gap:12px}.btn,.file{background:#0c0c0c;border:2px solid #0c0c0c;color:#fff;padding:12px 18px;font-size:14px;font-weight:800;cursor:pointer;border-radius:0}.btn.outline,.file{background:transparent;color:#0c0c0c}.file input{display:none}#drop{padding:14px 17px;border:2px dashed #888;flex:1;min-width:260px;text-align:center;font-weight:700}#drop.over{background:#ddd}.small{font-size:12px;letter-spacing:.035em;line-height:1.5}.lower{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:22px}.lower label{font-size:12px;font-weight:900;letter-spacing:.1em}.lower output{font-size:20px;display:block;margin:6px 0}#msg{font-weight:700}#stats{font-size:12px;opacity:.7}.mode{display:flex;gap:16px;align-items:center;margin-top:10px}button:disabled{opacity:.4;cursor:default}@media(max-width:730px){.main{grid-template-columns:1fr;gap:4px;margin-top:15px}.art{min-height:280px}#particles{height:275px}aside{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}aside label{margin:0}aside label strong{font-size:15px}aside label output{font-size:24px}.lower{grid-template-columns:1fr 1fr}header b{font-size:14px}}
 
@@ -37,6 +37,7 @@
 #teensyPage .teensy-actions .btn{padding:8px 12px;font-size:12px}
 @media(max-width:700px){#teensyPage .knob-grid{grid-template-columns:repeat(4,minmax(0,1fr))}#teensyPage .macro-knob svg{max-height:80px}#teensyPage .macro-knob strong{font-size:10px}#teensyPage .macro-knob output{font-size:13px}#teensyStage .art{height:165px}}
 @media(max-width:480px){#teensyPage .knob-grid{grid-template-columns:repeat(3,minmax(0,1fr))}#teensyPage .macro-knob svg{max-height:90px}}
+
 </style>
 
 <style>
@@ -61,6 +62,7 @@ body{padding:14px clamp(16px,2.5vw,42px);max-width:1920px;margin:auto}
 .overview-header{margin:3px 0 6px}
 @media(max-width:1000px){.workbench{grid-template-columns:minmax(0,1fr) 310px;gap:12px}.control-sidebar{padding-left:10px}.control-sidebar .parameter-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:740px){.workbench{grid-template-columns:1fr}.control-sidebar{position:static;border-left:0;border-top:3px solid black;padding:8px 0}.control-sidebar .tab-panel{max-height:330px}.workbench .art{min-height:250px}.workbench #particles,.workbench #fluid{height:250px}}
+
 </style>
 <style>
 /* Compact parameter guidance, accessible with hover, focus or tap. */
@@ -103,6 +105,7 @@ body{padding:14px clamp(16px,2.5vw,42px);max-width:1920px;margin:auto}
 @media(max-width:1150px){.workbench{grid-template-columns:minmax(0,1fr) 390px}.control-sidebar .parameter-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:740px){.workbench{grid-template-columns:minmax(0,1fr)}.control-sidebar{position:static}.control-sidebar .parameter-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:450px){.control-sidebar .parameter-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
 </style>
 <style>
 /* Teensy preview is a separate control surface over the same running DSP. */
@@ -127,6 +130,7 @@ body.teensy-active header{display:none}
 body.teensy-active{padding-top:10px}
 @media(max-width:760px){#teensyPage .knob-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.macro-knob svg{max-width:128px}}
 @media(max-width:430px){#teensyPage .knob-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
 </style>
 
 <style>
@@ -153,25 +157,251 @@ body.teensy-active{padding-top:10px}
 #teensyPage .arc-fill{stroke-width:8}
 #teensyPage .macro-tip{min-width:175px}
 @media(max-width:790px){#teensyPage .hardware-layout{grid-template-columns:minmax(0,1fr)}#teensyPage .pad-grid{grid-template-rows:repeat(4,minmax(64px,90px))}#teensyStage .art{height:225px}}
+
+
+#sharpSettings{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px;font-size:13px;font-weight:bold}
+#sharpPanel{margin:12px 0;padding:18px 12px;border:1px solid #aaa;background:#e4e3df;text-align:center;overflow-x:auto}
+#sharpPanel[hidden]{display:none}
+#teensyStage.sharp-active>.art{display:none}
+#sharpShell{position:relative;box-sizing:content-box;width:var(--panel-w);height:var(--panel-h);margin:10px auto 16px;background:#aaa9a0;box-shadow:0 0 0 1px #77776c,0 2px 4px #0003;flex-shrink:0}
+#sharpLCD{position:absolute;left:var(--screen-x);top:var(--screen-y);display:block;width:var(--screen-w);height:var(--screen-h);max-width:none;border:0;image-rendering:pixelated;background:white;filter:sepia(.16) saturate(.48) brightness(.84) contrast(.84)}
+#sharpShell::after{content:'';position:absolute;left:var(--screen-x);top:var(--screen-y);width:var(--screen-w);height:var(--screen-h);pointer-events:none;box-shadow:inset 0 0 1px 1px #0004;background:linear-gradient(145deg,#ffffff0a,#00000005)}
+#sharpShell[data-light="bright"] #sharpLCD{filter:sepia(.12) saturate(.5) brightness(.97) contrast(.92)}
+#sharpShell[data-light="dim"] #sharpLCD{filter:sepia(.19) saturate(.5) brightness(.57) contrast(.68)}
+#sharpCalibration{margin:10px auto;max-width:440px;font-size:12px;line-height:1.5;text-align:left}
+#sharpCalibration summary{cursor:pointer;font-weight:bold}
+#sharpCalibration input[type="range"]{width:160px;vertical-align:middle}
+#sharpRuler{width:var(--ruler-w);height:12px;border:solid #333;border-width:0 1px 1px;margin:16px 0 5px;box-sizing:border-box;background:repeating-linear-gradient(to right,#333 0 1px,transparent 1px 20%);background-size:100% 6px;background-repeat:no-repeat;background-position:bottom}
+#sharpPanel .small{max-width:430px;margin:8px auto;line-height:1.5}
+
+#sharpSettings{padding:14px 0;border-bottom:1px solid #ddd;gap:12px 20px}
+#sharpSettings select,#waveshareSettings select{padding:6px;border:1px solid #aaa;background:#fff;border-radius:4px;font:inherit}
+#sharpPanel{background:#efefeb;border-color:#d1d1ca;border-radius:8px;padding:16px}
+#sharpShell{background:#a5a59b;box-shadow:0 0 0 1px #7c7e71,0 2px 5px #0002}
+#sharpLCD{filter:saturate(0) brightness(.91) contrast(.9)}
+.display-caption{display:flex;justify-content:space-between;gap:10px;font-size:9px;letter-spacing:.08em;color:#666;margin-bottom:18px}
+#waveshareSettings{display:flex;gap:16px;align-items:center;flex-wrap:wrap;font-size:12px;margin:12px 0}
+#waveshareSettings[hidden],#wavesharePanel[hidden]{display:none!important}
+#wavesharePanel{padding:16px;background:#e9eae7;border:1px solid #ccc;border-radius:8px;margin:12px 0;text-align:center}
+#wavesharePanel p{font-size:11px;line-height:1.5;color:#555}
+#waveshareShell{padding:8px;background:#161918;border-radius:8px;box-shadow:0 3px 6px #0002;max-width:640px;margin:auto}
+#waveshareLCD{display:block;width:100%;height:auto;aspect-ratio:4/3;background:#f7f8f5;border-radius:2px}
+
+#waveshareShell{width:var(--ips-w);height:var(--ips-h);max-width:none;box-sizing:content-box;padding:6px;border-radius:4px}
+#waveshareLCD{width:100%;height:100%;border-radius:0;image-rendering:auto}
+#teensyStage{min-width:0}
+#sharpPanel,#wavesharePanel{overflow-x:auto;min-width:0;max-width:100%;box-sizing:border-box}
+#waveshareCalibration{max-width:440px;text-align:left;font-size:12px;margin:12px auto;line-height:1.5}
+#waveshareCalibration summary{cursor:pointer;font-weight:bold}
+#waveshareScale{width:160px;vertical-align:middle}
+#waveshareRuler{width:var(--ruler-w);height:12px;border:solid #333;border-width:0 1px 1px;margin:16px 0 5px;box-sizing:border-box;background:repeating-linear-gradient(to right,#333 0 1px,transparent 1px 20%);background-size:100% 6px;background-repeat:no-repeat;background-position:bottom}
+
+/* v23.31: shared top transport and a touch-friendly instrument-first layout. */
+[hidden]{display:none!important}
+html{scroll-padding-top:150px}
+body,body.teensy-active{padding:12px clamp(12px,2vw,32px) 32px}
+#appToolbar{position:sticky;top:0;z-index:220;background:#f8f8f6f5;backdrop-filter:blur(8px);border-bottom:1px solid #c7c7c0;padding:10px 0 8px;margin-bottom:16px}
+.app-identity{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:10px;min-width:0}
+.app-identity strong{font-size:17px;letter-spacing:-.04em;white-space:nowrap}
+.app-identity #name{font-size:11px;letter-spacing:.02em;margin:0;max-width:50%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.primary-bar{display:flex;align-items:stretch;gap:8px}
+.primary-bar>.btn,.primary-bar>.file{min-height:44px;padding:12px 18px;border-radius:5px;font-size:12px;display:flex;align-items:center;justify-content:center;touch-action:manipulation}
+.primary-bar>.file{background:#111;color:#fff;border-color:#111}
+#appMessage{font-size:10px;font-weight:700;margin-top:7px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#555}
+#loadAudioControl:focus-visible,#moreActions summary:focus-visible,summary:focus-visible{outline:2px solid #555;outline-offset:3px}
+#moreActions{position:relative;margin-left:auto}
+#moreActions>summary{list-style:none;cursor:pointer;border:1px solid #aaa;border-radius:5px;padding:14px 16px;font-size:11px;font-weight:bold;min-height:44px}
+#moreActions>summary::-webkit-details-marker{display:none}
+#moreActions[open]>summary{background:#e5e5df}
+#moreActions>.utility{position:absolute;right:0;top:calc(100% + 8px);background:#f8f8f6;border:1px solid #aaa;padding:14px;box-shadow:0 8px 24px #0002;width:min(480px,calc(100vw - 28px));display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;border-radius:6px}
+#moreActions .btn{font-size:10px;min-height:44px;padding:9px 6px;border-radius:4px}
+#moreActions #drop,#moreActions #recordState{grid-column:1/-1;min-width:0;font-size:10px}
+.editor-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:12px 0}
+.editor-heading h1{font-size:24px;letter-spacing:-.05em}
+#teensyPage{padding:0;min-height:0;border-top:0}
+#teensyPage .teensy-head h2{font-size:26px;letter-spacing:-.05em}
+#teensyPage .teensy-head p{font-size:9px;line-height:1.5;letter-spacing:.05em}
+#exitTeensy,#enterTeensy{min-height:44px;font-size:11px;padding:10px 12px;border-radius:4px}
+#teensyPage .teensy-actions{margin:8px 0}
+#teensyPage .teensy-actions .btn{min-height:44px}
+#sharpSettings{align-items:start;gap:12px;margin-top:8px;padding:12px 0}
+#sharpSettings>label{min-height:44px;display:flex;gap:8px;align-items:center;font-size:12px}
+#sharpSettings input[type=checkbox]{width:18px;height:18px}
+#appearanceSettings{margin-left:auto;min-width:0}
+#appearanceSettings>summary{min-height:44px;padding:14px 8px;font-size:10px;cursor:pointer}
+.appearance-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:14px 0;font-size:12px;min-width:0}
+.appearance-grid label{display:grid;gap:7px;min-width:0}
+.appearance-grid input[type=range]{width:100%!important;min-height:32px}
+#displayRenderStatus{font-size:10px;overflow-wrap:anywhere}
+#teensyPage .hardware-layout{margin-top:8px}
+.control-sidebar{top:150px}
+@media(max-width:760px){
+ body,body.teensy-active{padding:0 12px 24px}
+ #appToolbar{margin-bottom:12px;padding-top:max(10px,env(safe-area-inset-top));backdrop-filter:none;background:#f8f8f6}
+ .primary-bar{gap:6px}.primary-bar>.file{flex:1}.primary-bar>.btn{padding:10px;font-size:11px}
+ #moreActions>summary{padding:14px 10px;font-size:10px}
+ #teensyPage .hardware-layout{grid-template-columns:minmax(0,1fr);gap:18px}
+ #teensyPage .hardware-left{display:flex;flex-direction:column;gap:12px}
+ #teensyPage .knob-grid{grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:auto;gap:12px 5px}
+ #teensyPage .macro-knob svg{max-width:88px;max-height:88px}
+ #teensyPage .macro-knob strong{font-size:10px}#teensyPage .macro-knob output{font-size:14px}
+ #teensyPage .pad-grid{grid-template-rows:repeat(4,minmax(54px,66px));gap:8px}
+ #teensyPage .hw-pad{font-size:16px;border-radius:6px}
+ #teensyPage .action-pad{font-size:10px}
+ #teensyStage .art{height:220px}
+ #appearanceSettings{width:100%;margin:0}#appearanceSettings>summary{min-height:36px;padding:10px 0}
+ #sharpSettings{gap:4px 12px}#sharpSettings>label:first-child{flex:1}
+ #sharpSettings>label:nth-child(2){font-size:0}#displayProfile{font-size:11px!important;max-width:190px;min-height:44px}
+ #waveshareSettings{display:grid;grid-template-columns:1fr 1fr;gap:10px}#waveshareSettings label{display:grid;gap:5px}#waveshareSettings span{grid-column:1/-1;line-height:1.5}
+ #sharpPanel,#wavesharePanel{padding:12px 8px;margin:4px 0}
+ .display-caption{font-size:8px;letter-spacing:0;gap:8px}
+ .workbench{grid-template-columns:minmax(0,1fr)}.control-sidebar{display:block;position:static;padding:10px 0;border-left:0;border-top:2px solid #111}
+ .control-sidebar .tab-panel{max-height:none;overflow:visible;padding-right:0}
+ .control-sidebar .parameter-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 14px}
+ .control-sidebar .tab{min-height:44px;font-size:12px}
+ .control-sidebar .help-trigger{min-width:24px;min-height:24px}
+ input[type=range]{min-height:36px;touch-action:pan-y}
+ input[type=number],select{font-size:16px!important;max-width:100%;min-height:40px}
+ .mode{flex-direction:column;align-items:start;overflow-wrap:anywhere}
+ .wave-top,.overview-header{flex-wrap:wrap;font-size:10px;line-height:1.5}
+ .slice-top strong{font-size:18px}.slice-top span{font-size:9px;line-height:1.5}
+ .keyboard-controls{gap:12px!important}.keyboard-controls label{min-width:0;max-width:100%}
+ .seqGrid{min-width:570px}.seq-block>div:first-child{gap:10px!important}.seq-block h2{font-size:18px!important}
+ #moreActions #drop{display:none}
+ #teensyPage .macro-tip{display:none!important}
+}
+@media(max-width:360px){.primary-bar>.btn{font-size:10px;padding:8px}.primary-bar>.file{font-size:10px;padding:8px}#teensyPage .teensy-head h2{font-size:22px}.app-identity strong{font-size:15px}#displayProfile{max-width:166px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.hw-pad{transition:none!important}}
+
+@media(max-width:760px){.keyboard-controls>label{flex:1 1 100%;width:100%;min-width:0}#keyboardMode{width:100%;min-width:0}.seq-block{min-width:0}.seq-block>div{max-width:100%}}
+
+.appearance-grid label,#waveshareSettings label{min-width:0}.appearance-grid select,#waveshareSettings select{min-width:0;width:100%}
+
+/* Clear, shallow keycaps inspired by transparent DOYS PC caps. */
+#teensyPage #teensyPads{padding:12px;border:1px solid #c8cac3;border-radius:12px;background:linear-gradient(145deg,#e2e4dd,#d4d8d0);gap:14px;box-shadow:inset 0 1px 2px #0001}
+#teensyPage .hw-pad{position:relative;isolation:isolate;overflow:hidden;border:1px solid #aeb7af;border-radius:10px;color:#18211b;font-family:Arial,Helvetica,sans-serif;font-weight:800;background:linear-gradient(145deg,#ffffffb0 0%,#f5fff54d 36%,#b9c9bd38 70%,#efffef6b 100%);box-shadow:inset 0 0 0 2px #ffffff80,inset 0 -5px 5px #839b8733,inset 3px 4px 5px #ffffffb3,0 4px 0 #a8b3a8,0 6px 5px #243d2426;text-shadow:0 1px 2px #fff;transition:transform .08s ease,box-shadow .08s ease}
+#teensyPage .hw-pad::before{content:'';position:absolute;z-index:-1;inset:12% 14% 17%;border-radius:50%;border:1px solid #c4cfc6c7;background:radial-gradient(ellipse at 50% 30%,#ffffff38 15%,#c2d1c226 65%,#edf8ed80 95%);box-shadow:inset 0 2px 4px #4059441c,0 1px 1px #fff9;pointer-events:none}
+#teensyPage .hw-pad::after{content:'';position:absolute;z-index:-2;left:37%;right:37%;top:34%;bottom:35%;border:1px solid #b5c1b56b;border-radius:4px;background:linear-gradient(90deg,transparent 35%,#a7bca733 35% 65%,transparent 65%),linear-gradient(transparent 35%,#a7bca733 35% 65%,transparent 65%);box-shadow:0 1px 2px #fff9;pointer-events:none}
+#teensyPage .action-pad{background:linear-gradient(145deg,#f4fff49c,#a9bda92b 70%,#e4efe461);font-size:12px}
+#teensyPage .hw-pad.down,#teensyPage .hw-pad:active{transform:translateY(3px);color:#132118;background:linear-gradient(145deg,#d2e5d28f,#b3ceb363);box-shadow:inset 0 0 0 2px #efffef66,inset 0 3px 7px #526b5226,0 1px 0 #8b9f8b,0 2px 2px #243d2426}
+#teensyPage .hw-pad:focus-visible{outline:2px solid #314c37;outline-offset:3px}
+@media(max-width:760px){#teensyPage #teensyPads{padding:8px;gap:9px;border-radius:9px}#teensyPage .hw-pad{border-radius:7px;font-size:15px}#teensyPage .action-pad{font-size:9px}}
+@media(prefers-reduced-motion:reduce){#teensyPage .hw-pad{transition:none}}
+
+/* Match the supplied DOYS reference: square clear body, raised circular rim. */
+#teensyPage #teensyPads{background:linear-gradient(145deg,#dededb,#d0d0cc);gap:13px;grid-template-rows:repeat(4,minmax(0,1fr));align-content:start;flex:0}
+#teensyPage .hw-pad{aspect-ratio:1;min-height:60px;border-radius:5px;border:1px solid #969995;color:#161916;background:linear-gradient(125deg,#ffffffbd 0%,#ffffff17 20%,#b9bcbb26 42%,#ffffff69 64%,#ffffff19 81%,#e9edeb8c 100%);box-shadow:inset 0 0 0 2px #ffffff8c,inset 0 0 0 4px #b8bfba40,inset 3px 3px 2px #fff9,inset -2px -3px 2px #727b7459,0 4px 0 #a5aba5,0 5px 0 1px #e8ece8,0 7px 5px #0002;text-shadow:0 1px 2px #fff}
+#teensyPage .hw-pad::before{inset:10% 10% 15%;border-radius:50%;border:2px solid #dce2dc;background:radial-gradient(ellipse at 48% 48%,#ffffff08 50%,#7d868073 57%,#ffffffeb 61%,#f6fff66b 65%,#686f6a80 69%,#ffffffcc 72%,#c1c9c15c 76%,transparent 80%);box-shadow:inset 1px 2px 1px #ffffffe6,inset -2px -3px 2px #747c7480,0 2px 1px #8b928c59,0 4px 3px #fff7}
+#teensyPage .hw-pad::after{left:37%;right:37%;top:33%;bottom:36%;border-radius:28%;border:1px solid #b8c0b8a1;background:linear-gradient(90deg,transparent 35%,#f7fff7c7 35% 65%,transparent 65%),linear-gradient(transparent 35%,#f7fff7a6 35% 65%,transparent 65%),radial-gradient(ellipse at 45% 35%,#ffffff59,#8e998e40);box-shadow:inset 1px 2px 1px #fffd,inset -1px -2px 1px #717c7166,0 2px 3px #0002}
+#teensyPage .action-pad{background:linear-gradient(125deg,#ffffffbd,#ffffff17 35%,#e1e6e130 65%,#ffffff8c)}
+#teensyPage .hw-pad.down,#teensyPage .hw-pad:active{color:#111;background:linear-gradient(135deg,#ffffff85,#c3cbc333 50%,#edf4ed80);box-shadow:inset 0 0 0 2px #ffffff8c,inset 0 3px 5px #62696226,0 1px 0 #8c948c,0 2px 2px #0002}
+@media(max-width:760px){#teensyPage #teensyPads{gap:9px;grid-template-rows:repeat(4,minmax(0,1fr))}#teensyPage .hw-pad{border-radius:4px;min-height:54px}#teensyPage .hw-pad::before{border-width:1px}}
+
+#waveshareSettings{grid-column:1/-1}
+@media(max-width:760px){#teensyPage .teensy-head>div{flex:1;min-width:0}#teensyPage .teensy-head h2{font-size:21px}#teensyPage .teensy-head p:first-child{display:none}#teensyPage .teensy-head p:last-child{font-size:8px;max-width:200px}#teensyPage .teensy-head{flex-wrap:nowrap;gap:8px}#exitTeensy{white-space:nowrap;font-size:10px;padding:10px 8px}.appearance-grid{padding-bottom:0}}
+
+/* Generated product-photo asset: one shared transparent sprite, live labels. */
+#teensyPage #teensyPads{background:linear-gradient(145deg,#e1e1de,#d0d0cc);gap:10px;padding:10px}
+#teensyPage .hw-pad,#teensyPage .action-pad{background:transparent url('./assets/doys-clear-top.png') center center/100% 100% no-repeat;border:0;border-radius:4px;box-shadow:none;color:#111;overflow:visible;text-shadow:0 1px 1px #fff,0 0 4px #fff;font-family:Arial,Helvetica,sans-serif;font-weight:800;padding:0 6px;transition:transform .08s ease,filter .08s ease;filter:drop-shadow(0 3px 2px #0002)}
+#teensyPage .hw-pad::before,#teensyPage .hw-pad::after{content:none;display:none}
+#teensyPage .hw-pad.down,#teensyPage .hw-pad:active{background:transparent url('./assets/doys-clear-top.png') center center/100% 100% no-repeat;transform:translateY(3px) scale(.985);box-shadow:none;filter:brightness(.94) drop-shadow(0 1px 1px #0002);color:#111}
+#teensyPage .hw-pad:focus-visible{outline:2px solid #333;outline-offset:2px}
+@media(max-width:760px){#teensyPage #teensyPads{gap:6px;padding:8px}#teensyPage .hw-pad{font-size:14px}#teensyPage .action-pad{font-size:9px}}
+@media(prefers-reduced-motion:reduce){#teensyPage .hw-pad{transition:none}}
+/* Web Edition live capture: compact, accessible, fluid in both editor and performance. */
+.live-strip{margin:12px 0 15px;padding:12px 15px;background:#eeeeec;border:2px solid #111}
+.live-label{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:13px;font-weight:900;letter-spacing:.035em}
+.live-label [data-simplr-capture-state]{font-size:11px;color:#555;letter-spacing:0}
+.live-settings{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;margin-top:10px}
+.live-settings label{font-size:11px;font-weight:800;letter-spacing:.025em;display:flex;align-items:center;gap:8px;margin:0}
+.live-settings label:first-child{flex:1 1 260px}
+.live-settings select{font:600 12px Arial,sans-serif;max-width:100%;min-width:160px;flex:1;padding:8px;border:1px solid #111;background:#fff;color:#111}
+.live-settings .live-monitor{cursor:pointer;white-space:nowrap}.live-monitor input{width:16px;height:16px;accent-color:#111}
+.live-monitor small{font-size:9px;font-weight:500}.level-label meter{width:120px;height:14px}
+.live-strip p{margin:9px 0 0;font-size:11px;line-height:1.45;color:#555}
+.performance-live{max-width:1100px;margin:10px auto}.live-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.live-actions .btn{font-size:11px;padding:9px 11px}
+@media(max-width:700px){.live-strip{padding:9px 10px}.live-settings{gap:9px}.live-settings label:first-child{flex:1 1 100%}.level-label meter{width:90px}}
 </style>
-<div id="fullPage">
-<header><h1>SIMPL_R LIQUID</h1><b>WEB EDITION · v0.23.13 · C++ / WASM</b><button id="enterTeensy" type="button" class="btn outline">PERFORMANCE MODE →</button></header><div class="sub" id="name">TEXTURE_01.WAV</div>
-<div class="workbench"><div class="stage"><div class="wave-top"><strong>ACTIVE WAVEFORM</strong><span id="zoomLabel">AUTO ZOOM · FULL SAMPLE</span></div><section class="art"><canvas id="particles" width="1200" height="470" aria-label="Detailed sample waveform with live liquid blobs at each active audio grain. Drag horizontally to choose a region." title="Drag across the waveform to select a granular playback region"></canvas><svg id="fluid" viewBox="0 0 1200 470" preserveAspectRatio="none" aria-hidden="true"><defs><filter id="ink" x="-15%" y="-45%" width="130%" height="190%" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="3.0" result="blur"/><feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 120 -60" result="viscous"/></filter><filter id="mist" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="2.5" result="blur"/><feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 120 -60"/></filter></defs><g id="grayFluid" filter="url(#mist)" fill="#858585"></g><g id="blackFluid" filter="url(#ink)" fill="#101010"></g></svg></section><section style="border-top:2px solid #111;padding:12px 0"><label style="font-weight:900">SAMPLE CACHE WINDOW (20 SEC) · START <output id="cachePositionOutput">0.0 s</output><input id="cachePosition" type="range" min="0" max="0" value="0" step="0.1"></label><button class="btn outline" id="cacheLoad" type="button">LOAD WINDOW</button><span class="small">Seek through the full file; playback pauses briefly to switch windows.</span></section><div class="overview-header"><strong>FULL SAMPLE / TRIM OVERVIEW</strong><span>DRAG START & END HANDLES BELOW</span></div><canvas id="overview" width="1200" height="100" aria-label="Full waveform overview. Drag left and right trim markers to adjust the zoomed range"></canvas><section class="trim-panel" aria-label="Non-destructive sample trim"><h2>SAMPLE TRIM</h2><p>Drag the left or right marker in the full-sample overview, or enter precise times below. Trim is non-destructive; all 13 piano slices follow the active range.</p><div class="trim-row"><label>START (SECONDS)<input id="trimStart" type="number" min="0" step="0.01" value="0" aria-label="Trim start in seconds"></label><label>END (SECONDS)<input id="trimEnd" type="number" min="0" step="0.01" value="0" aria-label="Trim end in seconds"></label></div><p id="trimInfo" aria-live="polite"></p></section><section class="slice-section" aria-label="Playable waveform slice piano"><div class="slice-top"><strong>SLICE KEYS</strong><span>MAC KEYBOARD: A W S E D F T G Y H U J K · HOLD TO SUSTAIN · PLAY NOT REQUIRED</span></div><div class="keyboard-controls" style="display:flex;gap:18px;align-items:end;flex-wrap:wrap;margin:0 0 14px"><label style="display:grid;gap:6px;font-weight:800">KEYBOARD MODE<select id="keyboardMode" style="padding:10px;border:2px solid #111;background:white;font-size:16px"><option value="0">SLICE — 13 POSITIONS</option><option value="1">PITCH — ONE POSITION, 13 NOTES</option></select></label><label style="display:grid;gap:6px;font-weight:800">SLICE SIZE <output id="sliceSizeOutput">100%</output><input type="range" id="sliceSize" min="1" max="800" step="1" value="100"></label><span id="keyboardHelp" class="small">SLICES SPREAD THROUGH TRIMMED REGION</span></div><div id="slicePiano" class="piano"></div><div class="small">13 chromatic keys · SLICE plays different regions · PITCH plays the same region transposed · hold to sustain without global Play.</div></section>
+<div id="appToolbar"><div class="app-identity"><strong>SIMPL_R / LIQUID</strong><span class="sub" id="name">TEXTURE_01.WAV</span></div><div class="primary-bar"><button id="webAudioEnable" type="button" class="btn" data-simplr-audio-enable>▶ ENABLE AUDIO</button><label class="file" id="loadAudioControl" tabindex="0" role="button" aria-label="Load audio file">＋ LOAD AUDIO<input type="file" id="file" accept=".wav,.mp3,audio/wav,audio/mpeg"></label><button class="btn" id="play" type="button">PAUSE</button><button class="btn outline" id="freeze" type="button">FREEZE OFF</button><details id="moreActions"><summary>MORE</summary><div class="utility"><button class="btn outline" id="record">● LIVE CAPTURE</button><button class="btn outline" id="reset">RESET REGION</button><button class="btn outline" id="outputRecord">● RECORD OUTPUT</button><button class="btn outline" id="outputStop" disabled>■ STOP OUTPUT</button><span id="recordState" class="small">OUTPUT READY</span><button class="btn outline" id="outputExport" disabled>↓ EXPORT PROCESSED WAV</button><button class="btn outline" id="export" disabled>↓ EXPORT CAPTURE WAV</button><button class="btn outline" id="teensySequence" type="button">SEQUENCE START / STOP</button><div id="drop">DROP WAV OR MP3 HERE</div></div></details></div><div id="appMessage" role="status" aria-live="polite">READY · LOAD A SAMPLE TO BEGIN</div></div>
+<div id="fullPage" hidden>
+<div class="editor-heading"><h1>FULL EDITOR</h1><button id="enterTeensy" type="button" class="btn outline">← INSTRUMENT</button></div>
+<div class="workbench"><div class="stage"><div class="wave-top"><strong>ACTIVE WAVEFORM</strong><span id="zoomLabel">AUTO ZOOM · FULL SAMPLE</span></div><section class="art"><canvas id="particles" width="1200" height="470" aria-label="Detailed sample waveform with live liquid blobs at each active audio grain. Drag horizontally to choose a region." title="Drag across the waveform to select a granular playback region"></canvas><svg id="fluid" viewBox="0 0 1200 470" preserveAspectRatio="none" aria-hidden="true"><defs><filter id="ink" x="-15%" y="-45%" width="130%" height="190%" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="3.0" result="blur"/><feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 120 -60" result="viscous"/></filter><filter id="mist" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="2.5" result="blur"/><feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 120 -60"/></filter><filter id="fxSoft" x="-25%" y="-55%" width="150%" height="210%"><feGaussianBlur stdDeviation="0.8"/></filter></defs><g id="fxUnderFluid" filter="url(#fxSoft)" aria-hidden="true"></g><g id="grayFluid" filter="url(#mist)" fill="#858585"></g><g id="blackFluid" filter="url(#ink)" fill="#101010"></g><g id="fxOverFluid" aria-hidden="true"></g></svg></section><section style="border-top:2px solid #111;padding:12px 0"><label style="font-weight:900">SAMPLE CACHE WINDOW (20 SEC) · START <output id="cachePositionOutput">0.0 s</output><input id="cachePosition" type="range" min="0" max="0" value="0" step="0.1"></label><button class="btn outline" id="cacheLoad" type="button">LOAD WINDOW</button><span class="small">Seek through the full file; playback pauses briefly to switch windows.</span></section><div class="overview-header"><strong>FULL SAMPLE / TRIM OVERVIEW</strong><span>DRAG START & END HANDLES BELOW</span></div><canvas id="overview" width="1200" height="100" aria-label="Full waveform overview. Drag left and right trim markers to adjust the zoomed range"></canvas><section class="trim-panel" aria-label="Non-destructive sample trim"><h2>SAMPLE TRIM</h2><p>Drag the left or right marker in the full-sample overview, or enter precise times below. Trim is non-destructive; all 13 piano slices follow the active range.</p><div class="trim-row"><label>START (SECONDS)<input id="trimStart" type="number" min="0" step="0.01" value="0" aria-label="Trim start in seconds"></label><label>END (SECONDS)<input id="trimEnd" type="number" min="0" step="0.01" value="0" aria-label="Trim end in seconds"></label></div><p id="trimInfo" aria-live="polite"></p></section><section class="slice-section" aria-label="Playable waveform slice piano"><div class="slice-top"><strong>SLICE KEYS</strong><span>MAC KEYBOARD: A W S E D F T G Y H U J K · HOLD TO SUSTAIN · PLAY NOT REQUIRED</span></div><div class="keyboard-controls" style="display:flex;gap:18px;align-items:end;flex-wrap:wrap;margin:0 0 14px"><label style="display:grid;gap:6px;font-weight:800">KEYBOARD MODE<select id="keyboardMode" style="padding:10px;border:2px solid #111;background:white;font-size:16px"><option value="0">SLICE — 13 POSITIONS</option><option value="1">PITCH — ONE POSITION, 13 NOTES</option></select></label><label style="display:grid;gap:6px;font-weight:800">SLICE SIZE <output id="sliceSizeOutput">100%</output><input type="range" id="sliceSize" min="1" max="800" step="1" value="100"></label><span id="keyboardHelp" class="small">SLICES SPREAD THROUGH TRIMMED REGION</span></div><div id="slicePiano" class="piano"></div><div class="small">13 chromatic keys · SLICE plays different regions · PITCH plays the same region transposed · hold to sustain without global Play.</div></section>
 <section class="seq-block" style="border-top:3px solid #111;padding:12px 0">
 <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><h2 style="margin:0;font-size:22px">SEQUENCER</h2><button id="seqToggle" class="btn outline" type="button">▶ START SEQUENCE</button><label>BPM <input id="bpm" type="number" min="40" max="240" value="120" style="width:74px;font-size:17px"></label><label><input id="metro" type="checkbox"> METRONOME</label><label>CLICK <input id="clickVolume" type="range" min="0" max="0.7" step=".01" value=".2"></label></div>
 <div style="overflow-x:auto"><div id="seqGrid" class="seqGrid" style="display:grid;grid-template-columns:42px repeat(16,minmax(29px,1fr));gap:3px;min-width:570px;margin-top:10px"></div></div>
 <p style="font-size:11px">13 NOTE ROWS × 16 STEPS · EACH STEP TRIGGERS WET GRANULAR NOTES · 1/16 NOTE PER STEP</p>
 </section>
-<div class="utility"><button class="btn" id="play">PAUSE</button><button class="btn outline" id="record">● LIVE CAPTURE</button><button class="btn outline" id="freeze">FREEZE OFF</button><button class="btn outline" id="reset">RESET REGION</button><button class="btn outline" id="outputRecord">● RECORD OUTPUT</button><button class="btn outline" id="outputStop" disabled>■ STOP OUTPUT</button><span id="recordState" class="small">OUTPUT READY</span><button class="btn outline" id="outputExport" disabled>↓ EXPORT PROCESSED WAV</button><button class="btn outline" id="export" disabled>↓ EXPORT CAPTURE WAV</button><label class="file">LOAD AUDIO<input type="file" id="file" accept=".wav,.mp3,audio/wav,audio/mpeg"></label><div id="drop">DROP WAV OR MP3 HERE</div></div>
-</div><aside class="control-sidebar"><nav class="tab-bar" aria-label="Parameter groups"><button type="button" class="tab active" data-panel="audioPanel">GRANULATOR</button><button type="button" class="tab" data-panel="liquidPanel">LIQUID</button><button type="button" class="tab" data-panel="fxPanel">POST-FX</button></nav><div id="audioPanel" class="tab-panel"><section class="parameter-section"><h2>GRANULATOR · AUDIO</h2><p>Parameters that change grain generation and sound.</p><label style="display:grid;gap:5px;font-weight:800;margin-bottom:12px">DENSITY MODE<select id="densityMode" style="padding:10px;font-size:16px;border:2px solid #111"><option value="0">PER NOTE</option><option value="1">GLOBAL · SHARED</option></select></label><div class="parameter-grid" id="granulator"></div></section></div><div id="liquidPanel" class="tab-panel" hidden><section class="parameter-section"><h2>LIQUID · VISUALS</h2><p>Independent visual controls; these do not change the audio.</p><div class="parameter-grid" id="liquid"></div></section></div><div id="fxPanel" class="tab-panel" hidden><section class="parameter-section"><h2>POST-FX</h2><p>Algorithmic reverbs and stereo delay applied after the granular mixer.</p><div class="parameter-grid" id="fxControls"></div></section></div><div class="mode"><span id="msg" class="small">READY · WAV + MP3</span><span id="stats"></span><span class="small" id="length"></span></div>
-</aside></div><p class="small">Audio runs entirely in your browser. Click ENABLE AUDIO before playing. Record processed output locally, then export 16-bit stereo WAV; no uploads or audio servers. Direction, Travel, Speed, and Grain Spread alter audio sample-read positions and therefore the liquid grain positions. Travel 0% restores the original playback. Vertical Spread disperses grain visuals without altering pitch, pan, or grain playback. Surface Tension and Viscosity shape the rendering only. The large waveform automatically zooms to the selected sample region; edit its bounds using overview handles or precise START/END time inputs.</p>
-</div><section id="teensyPage" hidden aria-label="Teensy 4.1 preview controls">
-<div class="teensy-head"><div><p>SIMPL_R / LIQUID · INSTRUMENT VIEW</p><h2>LIQUID PERFORMANCE</h2><p>LOCAL WEBASSEMBLY DSP · 64 GRAIN LIMIT · SHARED DENSITY</p></div><button class="btn outline" id="exitTeensy" type="button">← FULL EDITOR</button></div>
-<div class="hardware-layout"><div class="hardware-left"><div id="teensyStage" aria-label="Live waveform and liquid grains"></div><div class="knob-grid" id="macroGrid" aria-label="Eight instrument macro controls"></div></div><div class="hardware-right"><div class="pad-caption">LIQUID · PERFORMANCE PADS</div><div class="pad-grid" id="teensyPads" aria-label="16 touch performance pads"></div><div class="pad-caption">12 NOTE PADS · K RECORD / STOP · SEQ REPLAY</div></div></div>
-<div class="teensy-info"><span id="macroDescription" aria-live="polite">Select a macro. Scroll or drag vertically to adjust; arrow keys work too.</span><span>All changes update the running audio engine and remain visible in Full Editor.</span></div>
-<div class="teensy-actions"><button class="btn" id="teensyPlay" type="button">PAUSE / PLAY</button><button class="btn outline" id="teensySequence" type="button">RECORDED SEQUENCE START / STOP</button></div>
+<section class="live-strip" aria-label="Live audio input and recording">
+<div class="live-label"><strong>◉ LIVE INPUT / CAPTURE</strong><span data-simplr-capture-state role="status">INPUT IDLE · HEADPHONES RECOMMENDED</span></div>
+<div class="live-settings">
+<label>INPUT DEVICE <select aria-label="Audio input device" data-simplr-input><option value="">DEFAULT MICROPHONE / INTERFACE</option></select></label>
+<label class="live-monitor"><input type="checkbox" data-simplr-monitor> MONITOR DRY INPUT <small>(headphones only)</small></label>
+<label class="level-label">INPUT LEVEL <meter data-simplr-level min="0" max="1" value="0" aria-label="Live input level"></meter></label>
+</div>
+<p>Record up to 30 seconds directly into the granular engine. Stop to use the recording as a sample. The raw input and processed output export separately. No audio leaves this browser.</p>
 </section>
-<script src="./web-adapter.js"></script>
+</div><aside class="control-sidebar"><nav class="tab-bar" aria-label="Parameter groups"><button type="button" class="tab active" data-panel="audioPanel">GRANULATOR</button><button type="button" class="tab" data-panel="liquidPanel">LIQUID</button><button type="button" class="tab" data-panel="fxPanel">POST-FX</button></nav><div id="audioPanel" class="tab-panel"><section class="parameter-section"><h2>GRANULATOR · AUDIO</h2><p>Parameters that change grain generation and sound.</p><label style="display:grid;gap:5px;font-weight:800;margin-bottom:12px">DENSITY MODE<select id="densityMode" style="padding:10px;font-size:16px;border:2px solid #111"><option value="0">PER NOTE</option><option value="1">GLOBAL · SHARED</option></select></label><div class="parameter-grid" id="granulator"></div></section></div><div id="liquidPanel" class="tab-panel" hidden><section class="parameter-section"><h2>LIQUID · VISUALS</h2><p>Independent visual controls; these do not change the audio.</p><div class="parameter-grid" id="liquid"></div></section></div><div id="fxPanel" class="tab-panel" hidden><section class="parameter-section"><h2>POST-FX</h2><p>Algorithmic reverbs and stereo delay applied after the granular mixer.</p><div class="parameter-grid" id="fxControls"></div></section></div><div class="mode"><span id="msg" class="small">READY · WAV + MP3</span><span id="stats"></span><span class="small" id="length"></span></div>
+</aside></div><p class="small">Live input: select microphone or line input in macOS Sound Settings. Use headphones to avoid feedback. Capturing uses a 30-second rolling buffer; STOP CAPTURE preserves it, then EXPORT CAPTURE WAV downloads the captured audio. Direction, Travel, Speed, and Grain Spread alter audio sample-read positions and therefore the liquid grain positions. Travel 0% restores the original playback. The grain blobs scale using the real DSP grain envelope; their viscous trails follow stored read-head positions rather than a direction sign. Grain direction controls actual read direction even when TRAVEL is 0%. Vertical Spread disperses grain visuals without altering pitch, pan, or grain playback. Surface Tension and Viscosity shape the rendering only. The large waveform automatically zooms to the selected sample region; edit its bounds using overview handles or precise START/END time inputs.</p>
+</div><section id="teensyPage" aria-label="Teensy 4.1 preview controls">
+<div class="teensy-head"><div><p>SIMPL_R / LIQUID · INSTRUMENT VIEW</p><h2>LIQUID PERFORMANCE</h2><p>WEBASSEMBLY DSP · 64 GRAIN LIMIT · SHARED DENSITY</p></div><button id="webAudioEnableInstrument" type="button" class="btn" data-simplr-audio-enable>▶ ENABLE AUDIO</button><button class="btn outline" id="exitTeensy" type="button">FULL EDITOR →</button></div>
+<div class="teensy-actions" hidden><button class="btn" id="teensyPlay" type="button" hidden>PAUSE / PLAY</button></div>
+<div id="sharpSettings"><label><input id="sharpEnabled" type="checkbox"> Display preview</label><label>Display <select id="displayProfile"><option value="sharp">SHARP · 400 × 240</option><option value="waveshare">Waveshare 2.8B · IPS</option></select></label><details id="appearanceSettings"><summary>DISPLAY SETTINGS</summary><div class="appearance-grid"><label id="sharpRateSetting">Refresh <select id="sharpFPS"><option value="15">15 fps</option><option value="20">20 fps</option></select></label><label id="sharpSizeSetting">Size <select id="sharpSize"><option value="actual">Actual size · calibrated</option><option value="large">Enlarged · 2×</option></select></label><label>Liquid scale <input id="sharpLiquidScale" type="range" min="0.1" max="2" step="0.01" value="0.52" style="width:100px;vertical-align:middle"><output id="sharpLiquidScaleValue">0.52×</output></label><label id="sharpLightSetting">Ambient light <select id="sharpLight"><option value="normal">Indoor</option><option value="bright">Bright</option><option value="dim">Dim</option></select></label></div></details></div>
+<p id="displayRenderStatus" class="small" role="status">Portable embedded renderer · local WebAssembly</p><div id="waveshareSettings" hidden><label>Refresh <select id="waveshareFPS"><option value="30">30 fps</option><option value="60">60 fps · experimental target</option></select></label><label>Size <select id="waveshareSize"><option value="actual">Actual size · calibrated</option><option value="large">Enlarged · 2×</option></select></label><span>640 × 480 landscape · RGB565 · frame rate assumes sufficient processing speed</span></div>
+<div class="hardware-layout"><div class="hardware-left"><div id="teensyStage" aria-label="Live waveform and liquid grains"><section id="wavesharePanel" hidden><div class="display-caption"><strong>WAVESHARE / 2.8B</strong><span>IPS · LANDSCAPE</span></div><div id="waveshareShell"><canvas id="waveshareLCD" width="640" height="480" aria-label="Waveshare 480 by 640 IPS display rotated to 640 by 480 landscape"></canvas></div><p id="waveshareSizeNote"></p><details id="waveshareCalibration"><summary>Calibrate physical size</summary><p>Measure the line with a ruler and adjust until it is exactly <strong>50 mm</strong>. Calibration applies to both display profiles.</p><div id="waveshareRuler" aria-label="50 millimeter calibration line"></div><span>50 mm</span><p><label>Scale <input id="waveshareScale" type="range" min="50" max="250" step="1" value="100"><output id="waveshareScaleValue">100%</output></label> <button id="waveshareScaleReset" type="button">Reset</button></p><p><label>Active width <input id="waveshareActiveWidth" type="number" min="40" max="75" step="0.01" value="56.896" style="width:85px"> mm</label><br>Default derived from the advertised 2.8-inch diagonal and 4:3 landscape aspect. Enter your measured active width for a precise match. Recheck after changing monitor or browser zoom.</p></details></section><section id="sharpPanel" hidden><div class="display-caption"><strong>SHARP / MEMORY LCD</strong><span>400 × 240 · 1 BIT</span></div><div id="sharpShell" data-light="normal"><canvas id="sharpLCD" width="400" height="240" aria-label="400 by 240 monochrome LCD preview, 58.8 by 35.28 mm active area after calibration"></canvas></div><p class="small" id="sharpSizeNote">Active area 58.8 × 35.28 mm · 2.7 inch diagonal.<br>Calibrate below for physical size on your monitor.</p><details id="sharpCalibration"><summary>Calibrate physical size</summary><p>At your current browser zoom, adjust until this line measures exactly <strong>50 mm</strong> with a ruler. Recheck after changing monitor or browser zoom.</p><div id="sharpRuler" aria-label="50 millimeter calibration line"></div><span>50 mm</span><p><label>Scale <input id="sharpScale" type="range" min="50" max="250" step="1" value="100"><output id="sharpScaleValue">100%</output></label> <button id="sharpScaleReset" type="button">Reset</button></p></details><p class="small">Reflective LCD appearance approximation · no backlight.<br>Knobs and pads represent physical controls outside the screen.</p></section></div><div class="knob-grid" id="macroGrid" aria-label="Eight instrument macro controls"></div></div><div class="hardware-right"><div class="pad-caption">LIQUID · PERFORMANCE PADS</div><div class="pad-grid" id="teensyPads" aria-label="16 touch performance pads"></div><div class="pad-caption">12 NOTE PADS · K RECORD / STOP · SEQ REPLAY</div></div></div>
+<div class="teensy-info"><span id="macroDescription" aria-live="polite">Select a macro. Scroll or drag vertically to adjust; arrow keys work too.</span><span>All changes update the running audio engine and remain visible in Full Editor.</span></div>
+<section class="live-strip performance-live" aria-label="Live capture from performance mode">
+<div class="live-label"><strong>◉ LIVE INPUT</strong><span data-simplr-capture-state role="status">INPUT IDLE · HEADPHONES RECOMMENDED</span></div>
+<div class="live-settings">
+<label>INPUT DEVICE <select aria-label="Performance input device" data-simplr-input><option value="">DEFAULT MICROPHONE / INTERFACE</option></select></label>
+<label class="live-monitor"><input type="checkbox" data-simplr-monitor> MONITOR DRY <small>(headphones only)</small></label>
+<label class="level-label">INPUT LEVEL <meter data-simplr-level min="0" max="1" value="0" aria-label="Live input level"></meter></label>
+</div>
+<div class="live-actions"><button type="button" class="btn outline" data-simplr-live>● LIVE CAPTURE</button><button type="button" class="btn outline" data-simplr-export-live disabled>↓ RAW WAV</button><button type="button" class="btn outline" data-simplr-output-record>● RECORD OUTPUT</button><button type="button" class="btn outline" data-simplr-output-stop disabled>■ STOP OUTPUT</button><button type="button" class="btn outline" data-simplr-output-export disabled>↓ PROCESSED WAV</button></div>
+</section>
+
+</section>
+<script src="./web-adapter.js?v=23.35"></script>
+<script>
+/* The browser presents pixels produced by embedded/LiquidDisplay.cpp. */
+(function(root){
+class SharpPreview {
+ constructor(canvas,color=false){this.canvas=canvas;this.color=color;this.c=canvas.getContext('2d');this.busy=false;this.epoch=0;this.reset();}
+ reset(){this.next=null;this.epoch++;this.resetPending=true;}
+ paint(now,fps,s){
+  fps=this.color?(fps===60?60:30):(fps===20?20:15);const step=1000/fps;
+  if(this.next!==null&&now+.01<this.next)return false;
+  if(this.next===null)this.next=now;this.next+=(Math.floor(Math.max(0,now-this.next)/step)+1)*step;
+  if(this.busy)return false;this.busy=true;const epoch=this.epoch;
+  const n=Math.min(64,s.grains.length),data=new Float32Array(24+256+n*8),v=s.vals;
+  data.set([n,now/1000,s.start,s.end,v.liquidScale,v.vertical,v.cohesion,v.tension,v.viscosity,v.fxType,v.fxMix,v.fxTime,v.fxFeedback,s.playing?1:0,this.resetPending?1:0,s.frozen?1:0]);
+  s.macroDefs.slice(0,8).forEach((d,i)=>data[16+i]=s.macroState[d.id]||0);
+  for(let i=0;i<256;i++){let peak=0;for(let k=Math.floor(i/256*s.peaks.length);k<Math.ceil((i+1)/256*s.peaks.length);k++)peak=Math.max(peak,s.peaks[k]||0);data[24+i]=peak;}
+  for(let i=0;i<n;i++)for(let j=0;j<8;j++)data[280+i*8+j]=Number(s.grains[i][j]??(j===5?Math.sin(Math.PI*s.grains[i][2]):j===4?i:0));
+  const wasReset=this.resetPending;this.resetPending=false;
+  this.pending=fetch(this.color?'/display/waveshare':'/display/sharp',{method:'POST',headers:{'Content-Type':'application/octet-stream'},body:data.buffer})
+   .then(async r=>{if(!r.ok)throw Error('Display renderer request failed');return new Uint8Array(await r.arrayBuffer());})
+   .then(bytes=>{
+    if(epoch!==this.epoch)return;
+    const W=this.canvas.width,H=this.canvas.height,expected=this.color?W*H*2:W*H/8;
+    if(bytes.length!==expected)throw Error('Display preview unavailable');
+    const frame=this.c.createImageData(W,H),out=frame.data;
+    for(let i=0;i<W*H;i++){
+     if(this.color){const p=bytes[i*2]|bytes[i*2+1]<<8;out[i*4]=Math.round((p>>11)*255/31);out[i*4+1]=Math.round(((p>>5)&63)*255/63);out[i*4+2]=Math.round((p&31)*255/31);}
+     else out[i*4]=out[i*4+1]=out[i*4+2]=(bytes[i>>3]&(0x80>>(i&7)))?255:0;
+     out[i*4+3]=255;
+    }
+    this.c.putImageData(frame,0,0);this.frameCount=(this.frameCount||0)+1;
+    document.querySelector('#displayRenderStatus').textContent='Portable embedded renderer · '+fps+' fps target';
+   }).catch(e=>{if(epoch===this.epoch){this.resetPending=this.resetPending||wasReset;document.querySelector('#displayRenderStatus').textContent=e.message;}})
+   .finally(()=>{this.busy=false;});
+  return true;
+ }
+}
+class WavesharePreview extends SharpPreview{constructor(canvas){super(canvas,true);}}
+root.SharpPreview=SharpPreview;root.WavesharePreview=WavesharePreview;
+})(globalThis);
+</script>
 <script>
 
 // A W S E D F T G Y H U J K: chromatic sample slices, one per key.
@@ -210,18 +440,18 @@ window.addEventListener('keydown',e=>{if(e.repeat||e.metaKey||e.ctrlKey||e.altKe
 window.addEventListener('keyup',e=>{const key=e.key.toLowerCase();if(pressedKeys.has(key)){e.preventDefault();keyOff(key)}});
 window.addEventListener('blur',()=>{for(const key of [...pressedKeys])keyOff(key)});
 
-const cfg=[['density','DENSITY',1,200,64,1,''],['grainBloom','GRAIN BLOOM',0,3000,0,10,' ms'],['grainTiming','GRAIN TIMING',0,1,.65,.01,'%'],['bloomVariation','BLOOM VARIATION',0,1,.25,.01,'%'],['maxGrains','MAX ACTIVE GRAINS',16,128,64,16,''],['size','GRAIN LENGTH',5,2000,175,1,' ms'],['spray','SPRAY',0,1,.47,.01,'%'],['pitch','PITCH',-24,24,0,.1,' st'],['position','POSITION',0,1,.5,.005,'%'],['gain','OUTPUT',0,2,.45,.01,'%'],['attack','ATTACK',0,1,.16,.01,'%'],['release','GRAIN DECAY',0,1,.24,.01,'%'],['noteRelease','NOTE RELEASE',0,5000,500,10,' ms'],['jitter','DENSITY JITTER',0,1,.1,.01,'%'],['pitchrandom','PITCH RANDOM',0,12,0,.1,' st'],['liquidScale','LIQUID SCALE',.1,2,.52,.01,'×'],['droplets','DROPLET DETAIL',0,8,5,1,''],['cohesion','LIQUID COHESION',0,1,.55,.01,'%'],['vertical','VERTICAL SPREAD',0,1,.55,.01,'%'],['tension','SURFACE TENSION',0,1,.64,.01,'%'],['viscosity','VISCOSITY',0,1,.66,.01,'%'],['travel','TRAVEL',0,1,0,.01,'%'],['speed','SPEED',0,1,.5,.01,'%'],['spread','GRAIN SPREAD',0,1,0,.01,'%']];
+const cfg=[['density','DENSITY',1,200,64,1,''],['grainBloom','GRAIN BLOOM',0,3000,0,10,' ms'],['grainTiming','GRAIN TIMING',0,1,.65,.01,'%'],['bloomVariation','BLOOM VARIATION',0,1,.25,.01,'%'],['maxGrains','MAX ACTIVE GRAINS',16,128,64,16,''],['size','GRAIN LENGTH',5,2000,175,1,' ms'],['spray','SPRAY',0,1,.47,.01,'%'],['organicPosition','ORGANIC DRIFT',0,1,0,.01,'%'],['pitch','PITCH',-24,24,0,.1,' st'],['position','POSITION',0,1,.5,.005,'%'],['gain','OUTPUT',0,2,.45,.01,'%'],['attack','ATTACK',0,1,.16,.01,'%'],['release','GRAIN DECAY',0,1,.24,.01,'%'],['noteRelease','NOTE RELEASE',0,5000,500,10,' ms'],['jitter','DENSITY JITTER',0,1,.1,.01,'%'],['pitchrandom','PITCH RANDOM',0,12,0,.1,' st'],['liquidScale','LIQUID SCALE',.1,2,.52,.01,'×'],['droplets','DROPLET DETAIL',0,8,5,1,''],['cohesion','LIQUID COHESION',0,1,.55,.01,'%'],['vertical','VERTICAL SPREAD',0,1,.55,.01,'%'],['tension','SURFACE TENSION',0,1,.64,.01,'%'],['viscosity','VISCOSITY',0,1,.66,.01,'%'],['travel','TRAVEL',0,1,0,.01,'%'],['speed','SPEED',0,1,.5,.01,'%'],['spread','GRAIN SPREAD',0,1,0,.01,'%']];
 const vals=Object.fromEntries(cfg.map(x=>[x[0],x[4]]));let start=0,end=1,sampleDuration=0,playing=true,frozen=false,recording=false,peaks=[],grains=[],inputLevel=0,outputLevel=0;
-function fmt(id,v){return ['density','maxGrains'].includes(id)?Math.round(v):['size','noteRelease','grainBloom'].includes(id)?Math.round(v)+' ms':['spray','position','gain','vertical','tension','viscosity','travel','speed','spread','attack','release','jitter','cohesion','grainTiming','bloomVariation'].includes(id)?Math.round(v*100)+'%':id==='droplets'?Math.round(v):id==='liquidScale'?v.toFixed(2)+'×':(+v).toFixed(1)+' st'}
+function fmt(id,v){return ['density','maxGrains'].includes(id)?Math.round(v):['size','noteRelease','grainBloom'].includes(id)?Math.round(v)+' ms':['spray','organicPosition','position','gain','vertical','tension','viscosity','travel','speed','spread','attack','release','jitter','cohesion','grainTiming','bloomVariation'].includes(id)?Math.round(v*100)+'%':id==='droplets'?Math.round(v):id==='liquidScale'?v.toFixed(2)+'×':(+v).toFixed(1)+' st'}
 const visualIds=new Set(['liquidScale','droplets','cohesion','vertical','tension','viscosity']);
-for(const [id,name,min,max,init,step] of cfg){const el=document.createElement('label');el.innerHTML=`<strong>${name}</strong><output>${fmt(id,init)}</output><input type="range" min="${min}" max="${max}" step="${step}" value="${init}" aria-label="${name}">`;
+for(const [id,name,min,max,init,step] of cfg){const el=document.createElement('label');el.innerHTML=`<strong>${name}</strong><output>${fmt(id,init)}</output><input id="${id}" type="range" min="${min}" max="${max}" step="${step}" value="${init}" aria-label="${name}">`;
  document.querySelector(visualIds.has(id)?'#liquid':'#granulator').append(el);
  el.querySelector('input').oninput=e=>{vals[id]=+e.target.value;el.querySelector('output').textContent=fmt(id,vals[id]);if(!visualIds.has(id))send()};}
 const fxConfigs=[['fxMix','MIX',0,1,0,.01],['fxTime','SIZE / TIME',0,1,.45,.01],['fxFeedback','DECAY / FEEDBACK',0,.92,.38,.01]];
-const fxMode=document.createElement('label');fxMode.innerHTML='<strong>FX TYPE</strong><select id="fxType" style="width:100%;padding:11px;border:2px solid black;background:white"><option value="0">OFF</option><option value="1">HALL</option><option value="2">PLATE</option><option value="3">ROOM</option><option value="4">DELAY</option><option value="5">PINGPONG DELAY</option><option value="6">SHIMMER REVERB</option></select>';
+const fxMode=document.createElement('label');fxMode.innerHTML='<strong>FX TYPE</strong><select id="fxType" style="width:100%;padding:11px;border:2px solid black;background:white"><option value="0">OFF</option><option value="1">HALL</option><option value="2">PLATE</option><option value="3">ROOM</option><option value="4">DELAY</option><option value="5">PINGPONG DELAY</option><option value="6">SHIMMER REVERB</option><option value="7">CHORUS</option><option value="8">COMB FILTER</option></select>';
 document.querySelector('#fxControls').append(fxMode);vals.fxType=0;
 fxMode.querySelector('select').onchange=e=>{vals.fxType=+e.target.value;toggleShimmer();refreshSpaceHelp();sendImmediate()};
-for(const [id,label,min,max,value,step] of fxConfigs){vals[id]=value;const el=document.createElement('label');el.innerHTML=`<strong>${label}</strong><output>${Math.round(value*100)}%</output><input type="range" min="${min}" max="${max}" value="${value}" step="${step}">`;document.querySelector('#fxControls').append(el);el.querySelector('input').oninput=e=>{vals[id]=+e.target.value;el.querySelector('output').textContent=Math.round(vals[id]*100)+'%';send()}}
+for(const [id,label,min,max,value,step] of fxConfigs){vals[id]=value;const el=document.createElement('label');el.innerHTML=`<strong>${label}</strong><output>${Math.round(value*100)}%</output><input id="${id}" type="range" min="${min}" max="${max}" value="${value}" step="${step}">`;document.querySelector('#fxControls').append(el);el.querySelector('input').oninput=e=>{vals[id]=+e.target.value;el.querySelector('output').textContent=Math.round(vals[id]*100)+'%';send()}}
 const shimmerSettings=document.createElement('div');
 shimmerSettings.id='shimmerControls';
 shimmerSettings.innerHTML='<label><strong>SHIMMER INTERVAL</strong><select id="shimmerInterval" style="width:100%;padding:10px;border:2px solid #111;background:white"><option value="7">+7 FIFTH</option><option value="12" selected>+12 OCTAVE</option><option value="19">+19 OCTAVE + FIFTH</option></select></label><label><strong>SHIMMER AMOUNT</strong><output id="shimmerAmountOut">60%</output><input type="range" id="shimmerAmount" min="0" max="1" step=".01" value=".6"></label><label><strong>SHIMMER TONE</strong><output id="shimmerToneOut">65%</output><input type="range" id="shimmerTone" min="0" max="1" step=".01" value=".65"></label>';
@@ -234,7 +464,7 @@ toggleShimmer();
 const directionLabel=document.createElement('label');directionLabel.innerHTML='<strong style="font-size:15px">GRAIN DIRECTION</strong><select id="direction" aria-label="Grain direction" style="width:100%;font-size:16px;padding:12px;border:2px solid #111;background:transparent"><option value="0">FORWARD</option><option value="1">REVERSE</option><option value="2">OUTWARD</option><option value="3">INWARD</option><option value="4">PINGPONG</option><option value="5">RANDOM</option></select>';
 document.querySelector('#granulator').prepend(directionLabel);
 const bloomCurveLabel=document.createElement('label');bloomCurveLabel.innerHTML='<strong>BLOOM CURVE</strong><select id="bloomCurve" style="font-size:16px;padding:10px;width:100%"><option value="0">LINEAR</option><option value="1">EXPONENTIAL</option><option value="2" selected>ORGANIC</option></select>';document.querySelector('#granulator').prepend(bloomCurveLabel);vals.bloomCurve=2;bloomCurveLabel.querySelector('select').onchange=e=>{vals.bloomCurve=+e.target.value;send()};
-const shapeLabel=document.createElement('label');shapeLabel.innerHTML='<strong>GRAIN SHAPE</strong><select id="shape" style="font-size:16px;padding:10px;width:100%"><option value="0">SMOOTH</option><option value="1">LINEAR</option><option value="2">EXPONENTIAL</option></select>';document.querySelector('#granulator').prepend(shapeLabel);vals.shape=0;shapeLabel.querySelector('select').onchange=e=>{vals.shape=+e.target.value;send()};
+const shapeLabel=document.createElement('label');shapeLabel.innerHTML='<strong>GRAIN SHAPE</strong><select id="shape" style="font-size:16px;padding:10px;width:100%"><option value="0">SMOOTH</option><option value="1">LINEAR</option><option value="2">EXPONENTIAL</option><option value="3">HANN</option><option value="4">GAUSSIAN</option><option value="5">TUKEY</option></select>';document.querySelector('#granulator').prepend(shapeLabel);vals.shape=0;shapeLabel.querySelector('select').onchange=e=>{vals.shape=+e.target.value;send()};
 vals.direction=0;directionLabel.querySelector('select').onchange=e=>{vals.direction=+e.target.value;send()};
 let seqPlaying=false,metroOn=false,bpm=120,clickVolume=.2,delayDivision=2,outputRecording=false;
 const grid=document.querySelector('#seqGrid');
@@ -272,11 +502,12 @@ const parameterHelp = {
  'NOTE RELEASE':'Time held notes fade after key release. Does not change individual grain length.',
  'DENSITY JITTER':'Random variation in grain timing; higher settings sound less regular.',
  'PITCH RANDOM':'Random pitch variation applied to new grains, in semitones.',
- 'GRAIN SHAPE':'Selects smooth, linear, or exponential grain-envelope shape.',
+ 'GRAIN SHAPE':'Selects smooth, linear, exponential, Hann, Gaussian, or Tukey grain-envelope shape.',
  'GRAIN DIRECTION':'Controls how each grain scans the source audio.',
  'TRAVEL':'Moves the grain playback region through the sample over time.',
  'SPEED':'Rate of directional movement through the source; not Grain Bloom.',
  'GRAIN SPREAD':'Spreads grain read positions around their starting point.',
+ 'ORGANIC DRIFT':'Slowly correlated movement of grain positions, computed once per grain; efficient on Teensy.',
  'LIQUID SCALE':'Size of the waveform-following liquid shapes. Visual only.',
  'DROPLET DETAIL':'Amount of small satellite liquid particles. Visual only.',
  'LIQUID COHESION':'How strongly nearby liquid elements join. Visual only.',
@@ -324,22 +555,23 @@ function send(){clearTimeout(pending);pending=setTimeout(sendImmediate,45)}
 
 // Teensy instrument surface. Mac audio remains active; this is not a firmware build.
 const macroDefs=[
- {id:'bloom',name:'BLOOM',help:'Density · Grain Bloom · Grain Timing · Bloom Variation · Note Release',links:[['density',8,128],['grainBloom',0,1800],['grainTiming',0.05,0.95],['bloomVariation',0.05,0.7]]},
- {id:'texture',name:'TEXTURE',help:'Grain Length · Slice Size · Grain Attack · Grain Decay',links:[['size',50,700],['sliceSize',0.1,2],['attack',0.08,0.38],['release',0.1,0.4]]},
- {id:'motion',name:'MOTION',help:'Playback Speed · Grain Spread',links:[['speed',0.25,0.95],['spread',0,0.9]]},
- {id:'color',name:'COLOR',help:'Grain Attack · Grain Decay · Density Jitter',links:[['attack',0,0.65],['release',0.12,0.85],['jitter',0,0.35]]},
+ {id:'bloom',name:'FLOW',help:'Density · Grain Bloom · Grain Timing · Bloom Variation · Note Release',links:[['density',1,128],['grainBloom',0,1800],['grainTiming',0.05,0.95],['bloomVariation',0.05,0.7]]},
+ {id:'texture',name:'MELT',help:'Grain Length · Slice Size · Grain Attack · Grain Decay',links:[['size',50,700],['sliceSize',0.1,4],['attack',0.08,0.38],['release',0.1,0.4]]},
+ {id:'motion',name:'DRIFT',help:'Playback Speed · Grain Spread · Organic Drift',links:[['speed',0.25,0.95],['spread',0,0.9],['organicPosition',0,0.75]]},
+ {id:'color',name:'RIPPLE',help:'Grain Articulation · Envelope Shape · Timing Jitter · Per-Grain Dynamics',links:[['attack',0.02,0.36],['release',0.24,0.07],['jitter',0,1],['ripple',0,1]]},
  {id:'space',name:'SPACE',help:'Mix · Size · Feedback',links:[['fxMix',0,0.58],['fxTime',0.25,0.85],['fxFeedback',0.14,0.51]]},
  {id:'pitch',name:'PITCH',help:'Pitch · Semitone Transposition',links:[['pitch',-12,12]]},
  {id:'fxsync',name:'FX SYNC',help:'Sync Division',links:[['delayDivision',0,4]]},
- {id:'fxtype',name:'FX TYPE',help:'FX Type',links:[['fxType',0,6]]}
+ {id:'fxtype',name:'FX TYPE',help:'FX Type',links:[['fxType',0,8]]}
 ];
+vals.ripple=0;
 const macroState=Object.fromEntries(macroDefs.map(x=>[x.id,50]));let teensyPreview=false,preTeensyLimits=null;
 const macroGrid=document.querySelector('#macroGrid');
 function arcPoint(t){const a=(135+270*t)*Math.PI/180;return [75+52*Math.cos(a),75+52*Math.sin(a)];}
 const macroPhysics=new Map();
 function drawMacro(el,val){
  const state=macroPhysics.get(el.id);if(state)state.target=val;
- el.querySelector('output').textContent=el.id==='macro-pitch'?`${Math.round((val-50)*24/100)>0?'+':''}${Math.round((val-50)*24/100)} st`:el.id==='macro-fxtype'?['OFF','HALL','PLATE','ROOM','DELAY','PINGPONG','SHIMMER'][Math.min(6,Math.round(val*6/100))]:el.id==='macro-fxsync'?['1/4','1/8','1/16','1/8 D','1/8 T'][Math.min(4,Math.round(val*4/100))]:Math.round(val)+'%';el.setAttribute('aria-valuenow',Math.round(val));
+ el.querySelector('output').textContent=el.id==='macro-pitch'?`${Math.round((val-50)*24/100)>0?'+':''}${Math.round((val-50)*24/100)} st`:el.id==='macro-fxtype'?['OFF','HALL','PLATE','ROOM','DELAY','PINGPONG','SHIMMER','CHORUS','COMB'][Math.min(8,Math.round(val*8/100))]:el.id==='macro-fxsync'?['1/4','1/8','1/16','1/8 D','1/8 T'][Math.min(4,Math.round(val*4/100))]:Math.round(val)+'%';el.setAttribute('aria-valuenow',Math.round(val));
 }
 function animateMacroPhysics(now){
  for(const [id,p] of macroPhysics){
@@ -376,11 +608,12 @@ function animateMacroPhysics(now){
  requestAnimationFrame(animateMacroPhysics);
 }
 requestAnimationFrame(animateMacroPhysics);
-function setParamFromMacro(id,value){if(id==='sliceSize'){const input=document.querySelector('#sliceSize');input.value=Math.round(value*100);input.dispatchEvent(new Event('input',{bubbles:true}));return;}if(!(id in vals))return;const row=cfg.find(c=>c[0]===id),actual=row?Math.min(row[3],Math.max(row[2],value)):value;
+function setParamFromMacro(id,value){if(id==='sliceSize'){const input=document.querySelector('#sliceSize');input.value=Math.round(value*100);automationApplying=true;try{input.dispatchEvent(new Event('input',{bubbles:true}));}finally{automationApplying=false;}return;}if(!(id in vals))return;const row=cfg.find(c=>c[0]===id),actual=row?Math.min(row[3],Math.max(row[2],value)):value;
  vals[id]=actual;let field;
  if(row){const labels=[...document.querySelectorAll('#granulator label, #liquid label')];field=labels.find(l=>l.querySelector('input[type="range"]')&&l.querySelector('strong')?.textContent===row[1]);}
  if(!field){field=[...document.querySelectorAll('#fxControls label')].find(l=>l.querySelector('input[type="range"]')&&({'fxMix':'MIX','fxTime':'SIZE / TIME','fxFeedback':'DECAY / FEEDBACK'}[id]===l.querySelector('strong')?.textContent));}
  if(field){const input=field.querySelector('input[type="range"]');if(input)input.value=actual;const out=field.querySelector('output');if(out)out.textContent=row?fmt(id,actual):Math.round(actual*100)+'%';}
+ if(id==='shape'){document.querySelector('#shape').value=String(Math.round(actual));}
  if(id==='delayDivision'){delayDivision=Math.round(value);division.querySelector('select').value=String(delayDivision);return;}
  if(id==='fxType'){vals.fxType=Math.round(value);document.querySelector('#fxType').value=String(vals.fxType);toggleShimmer();refreshSpaceHelp();return;}
  if(id==='shimmerAmount'){const inp=document.querySelector('#shimmerAmount'),out=document.querySelector('#shimmerAmountOut');inp.value=actual;out.textContent=Math.round(actual*100)+'%';}
@@ -389,16 +622,22 @@ function setParamFromMacro(id,value){if(id==='sliceSize'){const input=document.q
 // The exact set of mapped parameters depends on FX TYPE; no second delay engine is created.
 function spaceLinks(){
  const fx=Number(vals.fxType)||0;
- if(fx===5 || fx===4) return [['fxMix',0,0.72],['fxFeedback',0.12,0.66]]; // DELAY/PINGPONG
- if(fx===6) return [['fxMix',0,0.58],['fxTime',0.25,0.85],['fxFeedback',0.14,0.51],['shimmerAmount',0.02,0.70]];
- if(fx>=1 && fx<=3) return [['fxMix',0,0.58],['fxTime',0.25,0.85],['fxFeedback',0.14,0.51]];
- return []; // OFF leaves effect settings untouched
+ // SPACE at 100% reaches the largest available wet/time settings. Feedback
+ // stays within the DSP clamp and shy of unity to avoid runaway regeneration.
+ if(fx===7) return [['fxMix',0,1],['fxTime',0,1],['fxFeedback',0,1]]; // CHORUS: rate, not regeneration
+ if(fx===8) return [['fxMix',0,1],['fxTime',0,1],['fxFeedback',0,0.88]]; // COMB: DSP feedback ceiling
+ if(fx===5 || fx===4) return [['fxMix',0,1],['fxTime',0,1],['fxFeedback',0,0.90]];
+ if(fx===6) return [['fxMix',0,1],['fxTime',0,1],['fxFeedback',0,0.85],['shimmerAmount',0,0.70]];
+ if(fx>=1 && fx<=3) return [['fxMix',0,1],['fxTime',0,1],['fxFeedback',0,0.90]];
+ return [];
 }
 function spaceHelp(){
  const fx=Number(vals.fxType)||0;
- if(fx===5 || fx===4) return 'Delay Mix · Delay Feedback';
- if(fx===6) return 'Reverb Mix · Reverb Size · Feedback · Shimmer Amount';
- if(fx>=1 && fx<=3) return 'Reverb Mix · Reverb Size · Feedback';
+ if(fx===7) return 'Chorus Wet Mix · Modulation Depth · Modulation Rate';
+ if(fx===8) return 'Comb Wet Mix · Resonance Delay · Feedback';
+ if(fx===5 || fx===4) return 'Delay Wet Mix · Delay Time · Feedback';
+ if(fx===6) return 'Shimmer Wet Mix · Reverb Size · Feedback · Shimmer Amount';
+ if(fx>=1 && fx<=3) return 'Reverb Wet Mix · Reverb Size · Feedback';
  return 'Select an FX TYPE to control its parameters';
 }
 function refreshSpaceHelp(){
@@ -407,8 +646,21 @@ function refreshSpaceHelp(){
  const tip=el.querySelector('.macro-tip');if(tip)tip.textContent=help;
  if(document.activeElement===el)document.querySelector('#macroDescription').textContent=help;
 }
-function setMacro(def,val,apply=true){val=Math.max(0,Math.min(100,val));if(def.id==='pitch')val=Math.round(val*24/100)*100/24;if(def.id==='fxsync')val=Math.round(val*4/100)*25;if(def.id==='fxtype')val=Math.round(val*6/100)*100/6;macroState[def.id]=val;const el=document.querySelector('#macro-'+def.id);drawMacro(el,val);document.querySelector('#macroDescription').textContent=def.id==='space'?spaceHelp():def.help;
- if(apply){for(const [name,low,high] of (def.id==='space'?spaceLinks():def.links))setParamFromMacro(name,low+(high-low)*val/100);
+let automationApplying=false;
+let recordedControls=[];let replayOverrides=new Set();let lastControlRecorded=new Map();
+function captureControl(id,value){
+ if(automationApplying)return;
+ if(noteReplaying)replayOverrides.add(id);
+ if(!noteRecording || noteReplaying || recordedControls.length>=4096)return;
+ const now=performance.now()-recordingStarted;
+ const last=lastControlRecorded.get(id);
+ // At most 25 events/sec per control, plus a final movement event on pointer release.
+ if(last && now-last.t<40 && Math.abs(value-last.value)<3)return;
+ recordedControls.push({id,value,t:now});lastControlRecorded.set(id,{t:now,value});
+}
+function setMacro(def,val,apply=true){val=Math.max(0,Math.min(100,val));if(def.id==='pitch')val=Math.round(val*24/100)*100/24;if(def.id==='fxsync')val=Math.round(val*4/100)*25;if(def.id==='fxtype')val=Math.round(val*8/100)*100/8;if(apply)captureControl('macro:'+def.id,val);macroState[def.id]=val;const el=document.querySelector('#macro-'+def.id);drawMacro(el,val);document.querySelector('#macroDescription').textContent=def.id==='space'?spaceHelp():def.help;
+ if(apply){for(const [name,low,high] of (def.id==='space'?spaceLinks():def.links))setParamFromMacro(name,low+(high-low)*(def.id==='color'?Math.pow(val/100,2.1):val/100));
+ if(def.id==='color'){const t=val/100;setParamFromMacro('shape',t<.20?0:t<.40?5:t<.60?3:t<.80?4:2);}
  if(def.id==='bloom'){const t=val/100;setParamFromMacro('noteRelease',50*Math.pow(3000/50,t));}
  if(def.id==='space'&&Number(vals.fxType)===6){setParamFromMacro('shimmerTone',0.18+0.21*val/100);}
  sendImmediate();}}
@@ -420,6 +672,16 @@ for(const def of macroDefs){const el=document.createElement('div');el.className=
  let drag=null;el.addEventListener('pointerdown',e=>{drag={y:e.clientY,value:macroState[def.id]};el.setPointerCapture(e.pointerId);document.querySelector('#macroDescription').textContent=def.id==='space'?spaceHelp():def.help;});el.addEventListener('pointermove',e=>{if(drag)setMacro(def,drag.value+(drag.y-e.clientY)*.7)});el.addEventListener('pointerup',()=>drag=null);el.addEventListener('pointercancel',()=>drag=null);el.addEventListener('click',()=>{el.classList.toggle('tip-open');});el.addEventListener('blur',()=>el.classList.remove('tip-open'));
 }
 refreshSpaceHelp();
+// Save discrete edits from the Full Editor and replay them through existing UI event handlers.
+const automatableControls=new Set(['density','grainBloom','grainTiming','bloomVariation','size','spray','organicPosition','pitch','position','attack','release','jitter','pitchrandom','travel','speed','spread','shape','sliceSize','fxMix','fxTime','fxFeedback','fxType','shimmerAmount','noteRelease']);
+document.addEventListener('input',e=>{
+ const id=e.target?.id;
+ if(automatableControls.has(id) && !automationApplying)captureControl('param:'+id,Number(e.target.value));
+},true);
+document.addEventListener('change',e=>{
+ const id=e.target?.id;
+ if(automatableControls.has(id) && !automationApplying)captureControl('param:'+id,Number(e.target.value));
+},true);
 // Hardware-style 4×4 pads, sharing the original note events and key state.
 const padHost=document.querySelector('#teensyPads');
 const padKeys=sliceNotes.slice(0,12).map(n=>n[0]);
@@ -440,7 +702,7 @@ function stopNoteReplay(){
  noteReplaying=false;replayEpoch++;
  for(const handle of replayTimers)clearTimeout(handle);replayTimers=[];
  for(const key of padKeys){if(replayHeld.has(key)){sliceEvent(key,'off');setVisualKey(key,pressedKeys.has(key));}}
- replayHeld.clear();recordingStatus();
+ replayHeld.clear();replayOverrides.clear();recordingStatus();
 }
 const replayHeld=new Set();
 function toggleNoteRecording(){
@@ -450,9 +712,9 @@ function toggleNoteRecording(){
   for(const key of pressedKeys)recordNote(key,'off');
   noteRecording=false;
   noteRecordDuration=Math.max(100,performance.now()-recordingStarted);
-  msg('NOTE SEQUENCE CAPTURED · '+recordedNotes.length+' EVENTS');
+  msg('SEQUENCE CAPTURED · '+recordedNotes.length+' NOTES · '+recordedControls.length+' CONTROL EVENTS');
  }else{
-  recordedNotes=[];recordingStarted=performance.now();noteRecording=true;
+  recordedNotes=[];recordedControls=[];lastControlRecorded.clear();recordingStarted=performance.now();noteRecording=true;
   msg('● RECORDING NOTE SEQUENCE · PRESS K TO STOP');
  }
  recordingStatus();
@@ -461,11 +723,24 @@ let noteRecordDuration=0;
 function toggleNoteReplay(){
  if(noteRecording)toggleNoteRecording();
  if(noteReplaying){stopNoteReplay();return;}
- if(!recordedNotes.length){msg('RECORD NOTES WITH K FIRST');return;}
- noteReplaying=true;const epoch=++replayEpoch;recordingStatus();
- const span=Math.max(noteRecordDuration,Math.max(...recordedNotes.map(x=>x.t))+50,100);
+ if(!recordedNotes.length && !recordedControls.length){msg('RECORD WITH K FIRST');return;}
+ noteReplaying=true;replayOverrides.clear();const epoch=++replayEpoch;recordingStatus();
+ const span=Math.max(noteRecordDuration,Math.max(0,...recordedNotes.map(x=>x.t),...recordedControls.map(x=>x.t))+50,100);
  const scheduleLoop=()=>{
   if(!noteReplaying || replayEpoch!==epoch)return;
+  replayOverrides.clear(); // Live touch wins until the next loop boundary.
+  for(const evt of recordedControls){
+   replayTimers.push(setTimeout(()=>{
+    if(!noteReplaying || replayEpoch!==epoch || replayOverrides.has(evt.id))return;
+    automationApplying=true;
+    try{if(evt.id.startsWith('macro:')){
+      const def=macroDefs.find(d=>d.id===evt.id.slice(6));if(def)setMacro(def,evt.value,true);
+    }else{
+      const key=evt.id.slice(6),field=document.getElementById(key);
+      if(field){field.value=evt.value;field.dispatchEvent(new Event('input',{bubbles:true}));field.dispatchEvent(new Event('change',{bubbles:true}));}
+    }}finally{automationApplying=false;}
+   },evt.t));
+  }
   for(const evt of recordedNotes){
    replayTimers.push(setTimeout(()=>{
     if(!noteReplaying || replayEpoch!==epoch)return;
@@ -514,7 +789,7 @@ document.querySelector('#exitTeensy').onclick=()=>setTeensyMode(false);
 document.querySelector('#teensyPlay').onclick=()=>document.querySelector('#play').click();
 document.querySelector('#teensySequence').onclick=()=>toggleNoteReplay();
 
-const msg=x=>document.querySelector('#msg').textContent=x;
+const msg=x=>{document.querySelector('#msg').textContent=x;document.querySelector('#appMessage').textContent=x;};
 document.querySelector('#play').onclick=()=>{playing=!playing;document.querySelector('#play').textContent=playing?'PAUSE':'PLAY';send()};document.querySelector('#freeze').onclick=()=>{frozen=!frozen;document.querySelector('#freeze').textContent=frozen?'FREEZE ON':'FREEZE OFF';send()};document.querySelector('#reset').onclick=()=>{start=0;end=1;updateTrimInputs();send()};
 document.querySelector('#record').onclick=async()=>{try{let url=recording?'/record/stop':'/record/start';let response=await fetch(url,{method:'POST'}),data=await response.json();if(!response.ok)throw Error(data.error||'Capture failed');recording=!recording;document.querySelector('#record').textContent=recording?'■ STOP CAPTURE':'● LIVE CAPTURE';document.querySelector('#export').disabled=recording;msg(recording?'RECORDING · LIVE GRANULAR AUDIO':'CAPTURE SAVED · GRANULAR PLAYBACK');await status()}catch(e){msg(e.message)}};
 document.querySelector('#export').onclick=()=>{let a=document.createElement('a');a.href='/capture.wav';a.download='SIMPL_R_LIVE_CAPTURE.wav';document.body.append(a);a.click();a.remove();msg('EXPORTING CAPTURE · 48 KHZ STEREO WAV')};
@@ -571,6 +846,7 @@ setInterval(pollGrains,90);pollGrains();status();send();
 // Stable C++ grain slots avoid reassigning visual particles between polls.
 const NS='http://www.w3.org/2000/svg';
 const blackFluid=document.querySelector('#blackFluid'),grayFluid=document.querySelector('#grayFluid');
+const fxUnderFluid=document.querySelector('#fxUnderFluid'),fxOverFluid=document.querySelector('#fxOverFluid');
 const tracks=new Map();let lastFrame=performance.now();
 let smoothPeaks=[];
 let lastVisualPaint=0;
@@ -581,18 +857,61 @@ function damped(current,target,v,dt,omega=10){ // exact critically damped spring
  const temp=(v+omega*delta)*dt;
  return [target+(delta+temp)*e,(v-omega*temp)*e];
 }
-function blobShape(t,now){
- // Four-lobed damped surface: momentum pushes the leading tip, while
- // surface tension pulls deformations toward a circle. Closed cubic spline.
+// Surface memory changes shapes only; grain anchors remain DSP telemetry.
+const hdNecks=new Map();let hdMotionBounds='';
+function updateLiquidSurface(t,x,phase,now,dt,W){
+ let m=t.surface;const seam=m&&(Math.abs(x-m.rawX)>W*.22||phase+.12<m.phase);
+ if(!m||seam){t.surface={rawX:x,phase,at:now,velocity:0,strain:0,v:0};t.surfaceEpoch=(t.surfaceEpoch||0)+1;if(seam)t.trail.length=0;return;}
+ if(Math.abs(x-m.rawX)>.001||Math.abs(phase-m.phase)>.00001){m.velocity=clamp((x-m.rawX)/(Math.max(.001,(now-m.at)/1000)*W)*8,-1,1);m.rawX=x;m.phase=phase;m.at=now;}
+ else if(now-m.at>150)m.velocity*=Math.exp(-dt*12);
+ [m.strain,m.v]=damped(m.strain,m.velocity*(.35+.65*(1-vals.tension)),m.v,dt,18-9*vals.viscosity);
+}
+function liquidNeckStep(dt,dark,gray){
+ const nodes=[...tracks.values()].filter(t=>t.r>.5).slice(0,128),nearest=new Map(nodes.map(t=>[t,[]]));
+ for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){
+  const a=nodes[i],b=nodes[j],ratio=Math.hypot(a.x-b.x,a.y-b.y)/(a.r+b.r);if(ratio>1.5)continue;
+  for(const [p,q]of[[a,b],[b,a]]){const list=nearest.get(p);list.push({t:q,ratio});list.sort((a,b)=>a.ratio-b.ratio);list.length=Math.min(2,list.length);}
+ }
+ const degree=new Map(nodes.map(t=>[t,0]));
+ for(const [key,l]of hdNecks){if(!nearest.has(l.a)||!nearest.has(l.b)||tracks.get(l.a.id)!==l.a||tracks.get(l.b.id)!==l.b||l.ea!==l.a.surfaceEpoch||l.eb!==l.b.surfaceEpoch){hdNecks.delete(key);continue;}degree.set(l.a,degree.get(l.a)+1);degree.set(l.b,degree.get(l.b)+1);}
+ for(const a of nodes)for(const {t:b}of nearest.get(a)){
+  if(a.id>=b.id||degree.get(a)>=2||degree.get(b)>=2||!nearest.get(b).some(p=>p.t===a))continue;
+  const key=a.id+':'+b.id;if(hdNecks.has(key)||hdNecks.size>=128)continue;
+  hdNecks.set(key,{a,b,ea:a.surfaceEpoch,eb:b.surfaceEpoch,width:0,v:0});degree.set(a,degree.get(a)+1);degree.set(b,degree.get(b)+1);
+ }
+ for(const [key,l]of hdNecks){const {a,b}=l,d=Math.hypot(a.x-b.x,a.y-b.y),sum=a.r+b.r;
+  const selected=nearest.get(a).some(p=>p.t===b)&&nearest.get(b).some(p=>p.t===a);
+  const target=selected?vals.cohesion*clamp((1.5-d/sum)/.55,0,1):0;
+  [l.width,l.v]=damped(l.width,target,l.v,dt,12+6*vals.tension);
+  if(target===0&&l.width<.015&&Math.abs(l.v)<.08){hdNecks.delete(key);continue;}
+  if(l.width<.015||d>sum*2.2)continue;
+  const nx=-(b.y-a.y)/Math.max(.01,d),ny=(b.x-a.x)/Math.max(.01,d),upper=[],lower=[];
+  for(let i=0;i<=16;i++){const u=i/16,x=a.x+(b.x-a.x)*u,y=a.y+(b.y-a.y)*u,waist=.65+.35*Math.pow(Math.abs(2*u-1),1.6),r=Math.min(a.r,b.r)*(.14+.43*l.width)*waist*Math.sqrt(Math.max(0,l.width));upper.push([x+nx*r,y+ny*r]);lower.push([x-nx*r,y-ny*r]);}
+  const contour=upper.concat(lower.reverse());let path='M'+contour[0].join(',');for(let i=1;i<contour.length;i++)path+=' L'+contour[i].join(',');svgPath(a.gray||b.gray?gray:dark,path+' Z');
+ }
+}
+
+function blobShape(t,now,fx=null){
+ // The body remains at the *actual* read-head position. Chorus and comb distort
+ // its silhouette instead of moving the source position or inventing grains.
  const visc=vals.viscosity,tension=vals.tension;
  const speed=Math.hypot(t.vx,t.vy),angle=Math.atan2(t.vy,t.vx);
  const stretch=clamp(speed*.009*(1-.55*visc),0,.78)*(1-.55*tension);
  const wobble=t.wobble*(1-.72*tension);
- const count=20,pts=[];
+ const active=fx&&fx.wet>.02?Math.pow(fx.wet,.85)*(.30+.70*fx.depth):0;
+ const chorus=fx&&fx.mode===7?active:0;
+ const comb=fx&&fx.mode===8?active:0;
+ const time=now*.001, count=24,pts=[];
  for(let k=0;k<count;k++){
-   const a=k/count*Math.PI*2,aligned=Math.cos(a-angle);
-   const r=t.r*(1+stretch*(aligned*aligned-.45)+wobble*Math.sin(a*3+t.phase)+wobble*.55*Math.sin(a*5-t.phase*.8));
-   pts.push([t.x+Math.cos(a)*r,t.y+Math.sin(a)*r]);
+  const a=k/count*Math.PI*2,aligned=Math.cos(a-angle);
+  const undulation=chorus*(.21*Math.sin(a*3-time*(3+2*fx.feedback)+t.phase)
+          +.15*Math.sin(a*5+time*2.4-t.phase*1.1));
+  const teeth=comb*.17*Math.sin(a*9+Math.sin(time*1.4+t.phase)*.3);
+  const r=t.r*Math.max(.45,1+stretch*(aligned*aligned-.45)+wobble*Math.sin(a*3+t.phase)+
+    wobble*.55*Math.sin(a*5-t.phase*.8)+undulation+teeth);
+  // Animated wave shape is anchored at the original grain center.
+  const sideways=chorus*t.r*.20*Math.sin(a*2+time*3.5+t.phase);
+  pts.push([t.x+Math.cos(a)*r,t.y+Math.sin(a)*r+sideways]);
  }
  const smoothness=.88;
  let d='';
@@ -607,7 +926,219 @@ function blobShape(t,now){
 }
 function svgPath(group,d,opacity=1){const p=document.createElementNS(NS,'path');p.setAttribute('d',d);p.setAttribute('opacity',opacity.toFixed(3));group.appendChild(p)}
 function svgCircle(group,x,y,r,opacity=1){const c=document.createElementNS(NS,'circle');c.setAttribute('cx',x.toFixed(2));c.setAttribute('cy',y.toFixed(2));c.setAttribute('r',Math.max(.5,r).toFixed(2));c.setAttribute('opacity',opacity.toFixed(3));group.appendChild(c)}
+// Distinct effect visualization uses dedicated NON-thresholded SVG layers.
+// The grain bodies and trails always come from DSP read-position telemetry.
+// FX silhouettes/ghosts are deliberately illustrative, not extra audio grains.
+let fxVisualWet=0, fxPreviousMode=-1;
+const fxImprints=[];
+let fxImprintSerial=0;
+const fxNames=['OFF','HALL','PLATE','ROOM','DELAY','PING-PONG','SHIMMER','CHORUS','COMB'];
+function fxVisualState(dt){
+ const mode=Math.round(Number(vals.fxType)||0);
+ const target=mode===0?0:clamp(Number(vals.fxMix)||0,0,1);
+ // Changing effect type should not leave unrelated graphical ghosts behind.
+ if(mode!==fxPreviousMode){fxImprints.length=0;fxPreviousMode=mode;fxVisualWet=target;}
+ fxVisualWet+=(target-fxVisualWet)*(1-Math.exp(-dt*9));
+ return {mode,wet:clamp(fxVisualWet,0,1),depth:clamp(Number(vals.fxTime)||0,0,1),
+         feedback:clamp(Number(vals.fxFeedback)||0,0,.92),strength:Math.pow(clamp(fxVisualWet,0,1),.85)};
+}
+// Smooth organic closed contour used for time-persistent liquid impressions.
+function fxSilhouette(x,y,rx,ry,phase=0,warp=.07){
+ const n=16, pts=[];
+ for(let i=0;i<n;i++){
+  const a=2*Math.PI*i/n;
+  const flutter=1+warp*Math.sin(a*3+phase)+warp*.45*Math.cos(a*5-phase*1.4);
+  pts.push([x+Math.cos(a)*rx*flutter,y+Math.sin(a)*ry*flutter]);
+ }
+ const first=pts[0],last=pts[n-1];
+ let d=`M ${((first[0]+last[0])*.5).toFixed(2)} ${((first[1]+last[1])*.5).toFixed(2)} `;
+ for(let i=0;i<n;i++){
+  const p=pts[i],q=pts[(i+1)%n];
+  const mx=(p[0]+q[0])*.5,my=(p[1]+q[1])*.5;
+  d+=`Q ${p[0].toFixed(2)} ${p[1].toFixed(2)} ${mx.toFixed(2)} ${my.toFixed(2)} `;
+ }
+ return d+'Z';
+}
+function svgFxPath(group,d,fill,opacity=1,stroke=null,width=1){
+ const p=document.createElementNS(NS,'path');p.setAttribute('d',d);p.setAttribute('fill',fill);
+ if(stroke){p.setAttribute('stroke',stroke);p.setAttribute('stroke-width',String(width));}
+ p.setAttribute('opacity',clamp(opacity,0,1).toFixed(3));group.appendChild(p);
+}
+function fxEmit(t,fx,now,remaining){
+ if(remaining.count<=0||fx.strength<.08||t.env<.15||t.r<2)return;
+ if(!(fx.mode>=1&&fx.mode<=6))return;
+ if(now<(t.nextFxEmit||0))return;
+ // Bounded, staggered snapshots: one imprint represents an actual past position.
+ const interval=(fx.mode>=4&&fx.mode<=5?260:fx.mode===6?370:310)*(1.18-.47*fx.strength);
+ t.nextFxEmit=now+interval+(t.id%5)*19;
+ fxImprints.push({id:++fxImprintSerial,mode:fx.mode,x:t.x,y:t.y,r:Math.max(3,t.r),
+  env:t.env,phase:t.phase,at:now,depth:fx.depth,feedback:fx.feedback,
+  strength:fx.strength,dir:Math.sign(t.direction||0),side:fxImprintSerial%2?1:-1});
+ remaining.count--;
+}
+function fxPaintImprints(now,fx,behind){
+ const maxVisible=teensyPreview?75:100;
+ // FX decays continue after source grains vanish. Event count stays bounded.
+ for(let i=fxImprints.length-1;i>=0;i--){
+  const g=fxImprints[i];
+  const age=(now-g.at)/1000;
+  const ttl=g.mode<=3 ? (.65+1.45*g.depth+1.1*g.feedback) :
+    (g.mode===6?1.0+1.1*g.depth : .52+1.0*g.depth+1.1*g.feedback);
+  if(age>ttl||g.mode!==fx.mode)fxImprints.splice(i,1);
+ }
+ if(fxImprints.length>maxVisible)fxImprints.splice(0,fxImprints.length-maxVisible);
+ // Draw eldest first. Decay is continuous, not tied to the lifetime of a source grain.
+ for(const g of fxImprints){
+  const age=(now-g.at)/1000;
+  const ttl=g.mode<=3 ? (.65+1.45*g.depth+1.1*g.feedback) :
+    (g.mode===6?1.0+1.1*g.depth : .52+1.0*g.depth+1.1*g.feedback);
+  const life=clamp(age/ttl,0,1),fade=Math.pow(1-life,1.32);
+  const power=g.strength*fade*(.35+.65*g.env);
+  if(power<.008)continue;
+  if(g.mode===4||g.mode===5){
+   // Delay ghosts stay at historical *real* grain positions, separately fading.
+   // Ping-pong alternates a slight vertical echo offset as a visual metaphor.
+   const y=g.y+(g.mode===5?g.side*(11+26*g.depth)*Math.sin(Math.PI*life):0);
+   const swell=1+.18*Math.sin(Math.PI*life),r=g.r*swell;
+   svgFxPath(behind,fxSilhouette(g.x,y,r*.95,r*.74,g.phase+life*1.8,.11),
+     g.side===1?'#1b1b1b':'#676767',power*.66);
+   // Soft contour echoes make high feedback appear as persistent repeated trails.
+   if(g.feedback>.35)svgFxPath(behind,fxSilhouette(g.x,y,r*(1.15+.3*life),r*(.83+.2*life),g.phase,.06),
+     'none',power*.64,'#4f4f4f',1.4);
+  }else if(g.mode>=1&&g.mode<=3){
+   // Room = compact, Plate = horizontally smeared, Hall = diffuse/long-lived.
+   const hall=g.mode===1,plate=g.mode===2;
+   const expansion=(hall?3.7:plate?3.0:2.1)*(1+.55*g.depth)*life;
+   const rx=g.r*(1+expansion)*(plate?1.6:1),
+         ry=g.r*(1+expansion)*(plate?.43:hall?.86:1);
+   svgFxPath(behind,fxSilhouette(g.x,g.y,rx,ry,g.phase+life*2, hall?.12:.065),
+     hall?'#717171':plate?'#595959':'#393939',power*(hall?.25:plate?.24:.23));
+   svgFxPath(behind,fxSilhouette(g.x,g.y,rx*.84,ry*.84,g.phase+life*2,.07),
+     'none',power*.70,'#464646',1.15+g.strength*.9);
+  }else if(g.mode===6){
+   // Shimmer forms rising liquid glints, each born at a real source position.
+   const rise=life*(30+70*g.depth);
+   for(let j=0;j<2;j++){
+    const x=g.x+Math.sin(g.phase*4+life*5+j*2.5)*(8+15*g.depth)*life;
+    const y=g.y-rise-j*7;
+    svgFxPath(behind,fxSilhouette(x,y,g.r*(.46-j*.12)*(1-life*.55),
+      g.r*(.70-j*.15)*(1-life*.5),g.phase+life*5,.12),
+      j?'#8a8a8a':'#333333',power*(j?.38:.54));
+   }
+  }
+ }
+}
+function fxPaintLive(t,fx,now,front){
+ if(fx.strength<.035||t.r<1.2||t.env<.02)return;
+ const w=fx.strength*(.3+.7*fx.depth),time=now*.001;
+ if(fx.mode===7){
+  // CHORUS: visible animated undulations and two wavy interference lobes.
+  // These expand around (but never reposition) the actual grain read head.
+  for(const side of [-1,1]){
+   const offset=Math.sin(time*(2.8+4*fx.feedback)+t.phase*3+side)*t.r*(.5+w*.82);
+   const y=t.y+side*t.r*(.45+1.2*w);
+   svgFxPath(front,fxSilhouette(t.x+offset*.45,y,t.r*(.40+.75*w),
+      t.r*(.23+.56*w),t.phase+time*3+side,.20),
+      side<0?'#4d4d4d':'#999999',t.env*w*.49);
+  }
+ }else if(fx.mode===8){
+  // COMB: strong periodic interference ripples and corrugated grain surface.
+  for(let j=1;j<=3;j++){
+   const cycle=(time*(.32+.75*fx.depth)+t.phase+j/3)%1;
+   const radius=t.r*(1+.45*j+w*(.5+cycle*.65));
+   svgFxPath(front,fxSilhouette(t.x,t.y,radius,radius*(.55+.12*j),
+     t.phase+time+j,.025), 'none',t.env*w*(.59-j*.10),'#333333',.8+1.1*w);
+  }
+ }
+}
+const sharpCanvas=document.querySelector('#sharpLCD');
+const sharpDisplay=new SharpPreview(sharpCanvas);
+const waveshareDisplay=new WavesharePreview(document.querySelector('#waveshareLCD'));
+document.querySelector('#appearanceSettings .appearance-grid').append(document.querySelector('#waveshareSettings'));
+function updateSharpPreview(){
+ const enabled=document.querySelector('#sharpEnabled').checked;
+ const ips=document.querySelector('#displayProfile').value==='waveshare';
+ document.querySelector('#sharpPanel').hidden=!enabled||ips;
+ document.querySelector('#wavesharePanel').hidden=!enabled||!ips;
+ document.querySelector('#waveshareSettings').hidden=!enabled||!ips;
+ for(const id of ['sharpRateSetting','sharpSizeSetting','sharpLightSetting'])document.querySelector('#'+id).hidden=ips;
+ waveshareDisplay.reset();
+ document.querySelector('#sharpPanel').hidden=!enabled||ips;
+ document.querySelector('#teensyStage').classList.toggle('sharp-active',enabled);
+ sharpDisplay.reset();tracks.clear();fxImprints.length=0;lastFrame=performance.now();
+}
+document.querySelector('#sharpEnabled').onchange=updateSharpPreview;
+document.querySelector('#displayProfile').onchange=updateSharpPreview;
+document.querySelector('#waveshareFPS').onchange=()=>waveshareDisplay.reset();
+document.querySelector('#sharpFPS').onchange=()=>sharpDisplay.reset();
+const sharpScaleInput=document.querySelector('#sharpScale');
+try{const saved=Number(localStorage.getItem('liquid-sharp-scale'));if(saved>=50&&saved<=250)sharpScaleInput.value=String(saved);}catch(_){}
+function updateSharpPhysicalSize(){
+ const scale=Number(sharpScaleInput.value)/100,pxPerMM=96/25.4*scale;
+ const zoom=document.querySelector('#sharpSize').value==='large'?2:1;
+ const panel=document.querySelector('#sharpPanel');
+ for(const [name,mm] of Object.entries({'panel-w':62.8,'panel-h':42.82,'screen-w':58.8,'screen-h':35.28,'screen-x':2,'screen-y':2}))panel.style.setProperty('--'+name,(mm*pxPerMM*zoom)+'px');
+ panel.style.setProperty('--ruler-w',(50*pxPerMM)+'px');
+ const ipsPanel=document.querySelector('#wavesharePanel');
+ const ipsZoom=document.querySelector('#waveshareSize').value==='large'?2:1;
+ const widthInput=document.querySelector('#waveshareActiveWidth');
+ const rawWidth=Number(widthInput.value);
+ const activeWidth=Number.isFinite(rawWidth)&&rawWidth>=40&&rawWidth<=75?rawWidth:56.896;
+ ipsPanel.style.setProperty('--ips-w',(activeWidth*pxPerMM*ipsZoom)+'px');
+ ipsPanel.style.setProperty('--ips-h',(activeWidth*.75*pxPerMM*ipsZoom)+'px');
+ ipsPanel.style.setProperty('--ruler-w',(50*pxPerMM)+'px');
+ document.querySelector('#waveshareScale').value=sharpScaleInput.value;
+ document.querySelector('#waveshareScaleValue').textContent=sharpScaleInput.value+'%';
+ document.querySelector('#waveshareSizeNote').textContent=(ipsZoom===2?'Enlarged 2× · ':'Actual-size target · ')+activeWidth.toFixed(2)+' × '+(activeWidth*.75).toFixed(2)+' mm active area. Calibrate below.';
+ try{localStorage.setItem('liquid-waveshare-active-width',String(activeWidth));}catch(_){}
+
+ document.querySelector('#sharpScaleValue').textContent=sharpScaleInput.value+'%';
+ document.querySelector('#sharpShell').dataset.light=document.querySelector('#sharpLight').value;
+ document.querySelector('#sharpSizeNote').innerHTML=zoom===1?'Active area 58.8 × 35.28 mm · 2.7 inch diagonal.<br>Calibrate below for physical size on your monitor.':'Enlarged 2× for inspection · not physical size.<br>Native framebuffer remains 400 × 240 pixels.';
+ try{localStorage.setItem('liquid-sharp-scale',sharpScaleInput.value);}catch(_){}
+}
+sharpScaleInput.oninput=updateSharpPhysicalSize;
+document.querySelector('#sharpSize').onchange=updateSharpPhysicalSize;
+document.querySelector('#sharpLight').onchange=updateSharpPhysicalSize;
+document.querySelector('#sharpScaleReset').onclick=()=>{sharpScaleInput.value='100';updateSharpPhysicalSize();};
+try{const w=Number(localStorage.getItem('liquid-waveshare-active-width'));if(w>=40&&w<=75)document.querySelector('#waveshareActiveWidth').value=String(w);}catch(_){}
+document.querySelector('#waveshareScale').oninput=e=>{sharpScaleInput.value=e.target.value;updateSharpPhysicalSize();};
+document.querySelector('#waveshareScaleReset').onclick=()=>{sharpScaleInput.value='100';updateSharpPhysicalSize();};
+document.querySelector('#waveshareSize').onchange=updateSharpPhysicalSize;
+document.querySelector('#waveshareActiveWidth').oninput=updateSharpPhysicalSize;
+
+updateSharpPhysicalSize();
+function syncSharpLiquidScale(){
+ document.querySelector('#sharpLiquidScale').value=String(vals.liquidScale);
+ document.querySelector('#sharpLiquidScaleValue').textContent=vals.liquidScale.toFixed(2)+'×';
+}
+document.querySelector('#sharpLiquidScale').oninput=e=>{
+ const original=document.querySelector('#liquidScale');original.value=e.target.value;
+ original.dispatchEvent(new Event('input',{bubbles:true}));syncSharpLiquidScale();
+};
+document.querySelector('#liquidScale').addEventListener('input',syncSharpLiquidScale);
+syncSharpLiquidScale();
+// Display encoder graphics are live controls too; physical knobs below retain
+// the original SVG liquid physics and keyboard support.
+for(const [id,mono] of [['sharpLCD',true],['waveshareLCD',false]]){
+ const el=document.getElementById(id);el.style.touchAction='none';let drag=null;
+ el.addEventListener('pointerdown',e=>{
+  const r=el.getBoundingClientRect(),x=(e.clientX-r.left)*el.width/r.width,y=(e.clientY-r.top)*el.height/r.height;
+  const bottom=mono?132:270;if(y<bottom)return;
+  const index=Math.min(7,Math.floor(x/(el.width/4))+4*Math.min(1,Math.floor((y-bottom)/(mono?51:99))));
+  const def=macroDefs[index];if(!def)return;drag={def,y:e.clientY,value:macroState[def.id]};el.setPointerCapture(e.pointerId);e.preventDefault();
+ });
+ el.addEventListener('pointermove',e=>{if(drag)setMacro(drag.def,drag.value+(drag.y-e.clientY)*.7);});
+ const stop=()=>drag=null;el.addEventListener('pointerup',stop);el.addEventListener('pointercancel',stop);el.addEventListener('lostpointercapture',stop);
+}
+
 function animate(now){
+ if(teensyPreview&&document.querySelector('#sharpEnabled').checked){
+  const ips=document.querySelector('#displayProfile').value==='waveshare';
+  const renderer=ips?waveshareDisplay:sharpDisplay;
+  renderer.paint(now,Number(document.querySelector(ips?'#waveshareFPS':'#sharpFPS').value),{grains,peaks,start,end,vals,playing,frozen,macroState,macroDefs,fxNames});
+  lastFrame=now;lastVisualPaint=now;requestAnimationFrame(animate);return;
+ }
  if(now-lastVisualPaint<33){requestAnimationFrame(animate);return;}
  lastVisualPaint=now;
  const dt=Math.min(.05,Math.max(.001,(now-lastFrame)/1000));lastFrame=now;
@@ -628,17 +1159,21 @@ function animate(now){
    cx.strokeStyle='#777';cx.strokeRect(x0-W*sliceSize/26,mid-170,W*sliceSize/13,340);
  }
  document.querySelector('#zoomLabel').textContent=`AUTO ZOOM · ${(start*sampleDuration).toFixed(2)}–${(end*sampleDuration).toFixed(2)} SEC`;
+ const bounds=start+':'+end;if(bounds!==hdMotionBounds){tracks.clear();hdNecks.clear();fxImprints.length=0;hdMotionBounds=bounds;}
+ const fxVisual=fxVisualState(dt);
  const seen=new Set();
  for(let i=0;i<grains.length;i++){
    const g=grains[i],id=g.length>4?g[4]:i;
    seen.add(id);const x=((clamp(g[0],0,1)-start)/Math.max(.0000001,end-start))*W;
-   const amplitude=clamp(g[1],0,1),envelope=eased(g[2]);
+   const amplitude=clamp(g[1],0,1),envelope=clamp(g.length>5?g[5]:eased(g[2]),0,1);
    // Teensy preview raises visibility of REAL reported grains; no synthetic grain positions.
    const visualScale=teensyPreview?Math.max(0.92,vals.liquidScale*1.48):vals.liquidScale;
-   const size=(5+13*Math.sqrt(amplitude)+Math.min(7,g[3]*13))*Math.pow(envelope,teensyPreview?.76:1)*visualScale;
+   const size=(4+14*Math.sqrt(amplitude)+Math.min(7,g[3]*13))*Math.pow(envelope,teensyPreview?.52:.68)*visualScale;
    let t=tracks.get(id);
-   if(!t){t={id,x,y:mid,vx:0,vy:0,r:0,vr:0,env:0,life:0,missing:0,gray:id%5===0,phase:id*1.618,wobble:0,vw:0};tracks.set(id,t)}
-   t.life+=dt;t.missing=0;
+   if(t && g[2]+.12<t.lastPhase){tracks.delete(id);t=null;} // grain slot was recycled
+   if(!t){t={id,x,y:mid,vx:0,vy:0,r:0,vr:0,env:0,life:0,missing:0,gray:id%5===0,phase:id*1.618,wobble:0,vw:0,direction:0,flow:0,trail:[],lastPhase:0,lastTelemetryX:x,nextFxEmit:now+((id*47)%190)};tracks.set(id,t)}
+   updateLiquidSurface(t,x,g[2],now,dt,W);
+   t.life+=dt;t.missing=0;t.lastPhase=g[2];
    // Only tiny perpendicular deviation, centered on actual sample read position.
    // Stable per-grain vertical location: zero stays centered; full range
    // spans most of the art height. Exact sample position remains on X.
@@ -652,28 +1187,68 @@ function animate(now){
    [t.y,t.vy]=damped(t.y,targetY,t.vy,dt,motionOmega);
    [t.r,t.vr]=damped(t.r,Math.max(0,size),t.vr,dt,teensyPreview?15+vals.tension*7:5.5+vals.tension*7);
    t.env=envelope;
+   // Direction is read from the DSP, not inferred from visual animation.
+   t.direction=g.length>6?Math.sign(g[6]):0;
+   // Read-head velocity is tracked visually only; no synthetic source positions.
+   [t.flow,t.flowVelocity]=damped(t.flow||0,t.direction*(t.direction?1:0),t.flowVelocity||0,dt,13);
+   // Historical samples use the actual horizontal read-head location (not the
+   // damped rendered blob): no trail is invented when the source is stationary.
+   const old=t.trail[t.trail.length-1];
+   if(old && Math.abs(x-old.x)>W*.22){t.trail.length=0;} // avoid streaks across read-head wraps
+   t.trail.push({x,y:t.y,r:Math.max(0,size),at:now,env:envelope});
+   while(t.trail.length>15 || (t.trail.length && now-t.trail[0].at>530))t.trail.shift();
+   t.shape=g.length>7?g[7]:0;
  }
  // Grains that have ended dissolve smoothly rather than disappearing abruptly.
- for(const [id,t] of tracks){if(!seen.has(id)){t.missing+=dt;[t.r,t.vr]=damped(t.r,0,t.vr,dt,11);if(t.missing>.65||t.r<.45)tracks.delete(id)}}
+ for(const [id,t] of tracks){if(!seen.has(id)){t.missing+=dt;t.env*=Math.exp(-dt*10);[t.r,t.vr]=damped(t.r,0,t.vr,dt,11);if(t.missing>.65||t.r<.45)tracks.delete(id)}}
  const dark=document.createDocumentFragment(),gray=document.createDocumentFragment();
+ liquidNeckStep(dt,dark,gray);
+ const fxBack=document.createDocumentFragment(),fxFront=document.createDocumentFragment();
+ let emitBudget={count:5};
+ for(const t of tracks.values())if(!t.missing)fxEmit(t,fxVisual,now,emitBudget);
+ fxPaintImprints(now,fxVisual,fxBack);
  // Tiny loose satellite droplets move on eased trajectories and merge via the same filter.
  for(const t of tracks.values()){
    if(t.r<(teensyPreview?.5:.8))continue;
    const group=t.gray?gray:dark;
-   const path=document.createElementNS(NS,'path');path.setAttribute('d',blobShape(t,now));group.appendChild(path);
-   for(let k=0;k<vals.droplets;k++){
-     const seed=t.id*2.399+k*2.094;
-     const age=clamp(t.life/(.38+k*.07),0,1);
-     const progress=age*age*(3-2*age); // ease in/out
-     const drift=t.r*(.45+progress*(1.35+.38*k))*(1-.35*vals.tension)*(1.3-.65*vals.cohesion);
-     const x=t.x+Math.cos(seed)*drift+t.vx*.024*progress,y=t.y+Math.sin(seed)*drift*.75+t.vy*.024*progress;
-     const r=t.r*(.18-.06*progress)*(1-.5*progress)*(1+.22*(1-vals.tension));
-     const c=document.createElementNS(NS,'circle');c.setAttribute('cx',x.toFixed(2));c.setAttribute('cy',y.toFixed(2));c.setAttribute('r',Math.max(.4,r).toFixed(2));group.appendChild(c);
+   // Draw a continuous, tapering ribbon through actual past read-head positions.
+   // The newest sample is at the head, so reversing playback naturally reverses
+   // the wake. Stationary grains form no false directional spikes.
+   const history=t.trail.filter(q=>now-q.at<510);
+   if(history.length>2){
+     const newest=history[history.length-1];
+     const distance=Math.abs(newest.x-history[0].x);
+     if(distance>1.5){
+       const upper=[],lower=[];
+       for(let k=0;k<history.length;k++){
+         const h=history[k];
+         const age=clamp((now-h.at)/510,0,1);
+         const taper=Math.pow(1-age,1.75);
+         const radius=Math.max(0,h.r)*.43*taper;
+         upper.push([h.x,h.y-radius]);lower.push([h.x,h.y+radius]);
+       }
+       // Quadratic smoothing rounds the outline instead of drawing a rigid arrow.
+       const contour=upper.concat(lower.reverse());
+       if(contour.length>=6){
+         let d=`M ${contour[0][0].toFixed(2)} ${contour[0][1].toFixed(2)} `;
+         for(let j=1;j<contour.length;j++){
+           const a=contour[j],b=contour[(j+1)%contour.length];
+           d+=`Q ${a[0].toFixed(2)} ${a[1].toFixed(2)} ${((a[0]+b[0])/2).toFixed(2)} ${((a[1]+b[1])/2).toFixed(2)} `;
+         }
+         d+='Z';svgPath(group,d,clamp(t.env*.7,0,.82));
+       }
+     }
    }
+   const path=document.createElementNS(NS,'path');path.setAttribute('d',blobShape(t,now,fxVisual));group.appendChild(path);
+   fxPaintLive(t,fxVisual,now,fxFront);
+
  }
- blackFluid.replaceChildren(dark);grayFluid.replaceChildren(gray);
+ fxUnderFluid.replaceChildren(fxBack);blackFluid.replaceChildren(dark);
+ grayFluid.replaceChildren(gray);fxOverFluid.replaceChildren(fxFront);
  cx.fillStyle='rgba(0,0,0,.16)';cx.fillRect((+vals.position*(end-start)+start)*W,36,1,H-70);
  requestAnimationFrame(animate);
 }
 requestAnimationFrame(animate);
+document.querySelector('#loadAudioControl').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();document.querySelector('#file').click();}});
+setTeensyMode(true);
 </script></html>

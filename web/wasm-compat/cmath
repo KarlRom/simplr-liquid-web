@@ -13,5 +13,13 @@ inline double fmod(double a,double b){return ::fmod(a,b);}inline float fmod(floa
 inline double floor(double x){return ::floor(x);}inline float floor(float x){return (float)::floor(x);}
 inline double round(double x){return ::round(x);}inline float round(float x){return (float)::round(x);}
 inline double sqrt(double x){return ::sqrt(x);}inline float sqrt(float x){return (float)::sqrt(x);}
-inline float abs(float x){return __builtin_fabsf(x);}inline double abs(double x){return __builtin_fabs(x);}
+inline int abs(int x){return x<0?-x:x;}inline float abs(float x){return __builtin_fabsf(x);}inline double abs(double x){return __builtin_fabs(x);}
+}
+extern "C" { double atan2(double,double); double hypot(double,double); double ceil(double); }
+namespace std {
+inline double atan2(double a,double b){return ::atan2(a,b);} inline float atan2(float a,float b){return (float)::atan2(a,b);}
+inline double hypot(double a,double b){return ::hypot(a,b);} inline float hypot(float a,float b){return (float)::hypot(a,b);}
+inline double ceil(double x){return ::ceil(x);}inline float ceil(float x){return (float)::ceil(x);}
+inline long lround(double x){return (long)__builtin_lround(x);}inline long lround(float x){return (long)__builtin_lroundf(x);}
+inline bool isfinite(double x){return __builtin_isfinite(x);}inline bool isfinite(float x){return __builtin_isfinite(x);}
 }
