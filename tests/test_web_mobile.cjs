@@ -24,6 +24,8 @@ const fs=require('fs'),path=require('path'),assert=require('assert');
  assert(!await page.locator('#quickGuide').isVisible());
 
  const data=await page.evaluate(()=>{const box=s=>{let r=document.querySelector(s).getBoundingClientRect();return {x:r.x,y:r.y,right:r.right,bottom:r.bottom}};return {left:box('.hardware-left'),right:box('.hardware-right'),knobs:document.querySelectorAll('.macro-knob').length,pads:document.querySelectorAll('#teensyPads button').length,selection:getComputedStyle(document.querySelector('.hw-pad')).userSelect,overflow:document.documentElement.scrollWidth>innerWidth,toolbar:getComputedStyle(document.querySelector('#appToolbar')).position};});
+ const layers=await page.evaluate(()=>{const c=document.querySelector('#particles'),glass=document.querySelector('.waveform-glass'),g=document.querySelector('#fluid'),r=c.getBoundingClientRect();return {canvas:getComputedStyle(c).zIndex,glass:getComputedStyle(glass).zIndex,grains:getComputedStyle(g).zIndex,blur:getComputedStyle(glass).backdropFilter,pointer:getComputedStyle(glass).pointerEvents,hit:document.elementFromPoint(r.x+r.width/2,r.y+Math.min(r.height/2,50))?.id,grainBlur:getComputedStyle(g).filter,parent:glass.parentElement===c.parentElement};});
+ assert.equal(layers.canvas,'0');assert.equal(layers.glass,'1');assert.equal(layers.grains,'2');assert.equal(layers.pointer,'none');assert.equal(layers.grainBlur,'none');assert(layers.parent);assert(layers.blur.includes('blur(3px)'));
  assert.equal(data.knobs,8);assert.equal(data.pads,16);assert.equal(data.selection,'none');assert(!data.overflow,JSON.stringify(data));
  if(w<=1024){assert.equal(data.toolbar,'relative');await page.evaluate(()=>scrollTo(0,250));assert((await page.locator('#appToolbar').boundingBox()).y<0);await page.evaluate(()=>scrollTo(0,0));}
  if(w>h)assert(data.right.x>=data.left.right-1,JSON.stringify(data));else assert(data.right.y>=data.left.bottom-1);
@@ -31,6 +33,7 @@ const fs=require('fs'),path=require('path'),assert=require('assert');
  await page.locator('.action-pad[data-action="DIRECTION"]').click();assert.equal(await page.evaluate(()=>vals.direction),3);
  if(process.env.SCREENSHOT_DIR)await page.screenshot({path:path.join(process.env.SCREENSHOT_DIR,`view-${w}.png`),fullPage:true});
  await page.locator('#exitTeensy').click();assert(await page.locator('#fullPage').isVisible());
+ assert(await page.locator('#fullPage .art .waveform-glass').isVisible());
  assert.equal(await page.locator('#slicePiano button').first().evaluate(e=>getComputedStyle(e).userSelect),'none');
  console.log(`PASS ${w}x${h}: layout, scroll, selection, eight macros, sixteen pads, controls, editor`);
  }
@@ -49,7 +52,7 @@ const fs=require('fs'),path=require('path'),assert=require('assert');
  assert.equal(await page.evaluate(()=>SIMPLR_WEB.state.name),'JUNIOR_MESA.MP3');
  assert.equal(await page.evaluate(()=>noteReplaying),true);
  assert.equal(await page.locator('#play').textContent(),'PAUSE');
- await page.waitForTimeout(550);
+ await page.waitForFunction(()=>audioMessages.some(m=>m.type==='note'&&m.index===12&&m.on),{},{timeout:3000});
  assert(await page.evaluate(()=>audioMessages.some(m=>m.type==='note'&&m.index===12&&m.on)));
  assert.equal(await page.evaluate(()=>noteRecording),false);
  await page.locator('#play').click();
